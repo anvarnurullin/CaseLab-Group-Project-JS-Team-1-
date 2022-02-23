@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Product } from '../../typescript/main';
 import './ProductCard.css'
 
-function ProductCard({image, product}: {image:string, product:Product}) {
+function ProductCard({image, product, mainPage}: {image:string, product:Product, mainPage:boolean}) {
   let promoConditionTrue;
   let promoConditionTrueFalse;
   let promoWeight;
@@ -12,14 +12,17 @@ function ProductCard({image, product}: {image:string, product:Product}) {
   if(product.promo) {
     addToCardBtnPromo = 'addToCardBtnPromo';
     promoWeight = 'promoWeight';
-    promoProductCard = 'promoProductCard';
     promoConditionTrue = <>
       <div className='promoPrice'>
         <span>{`${product.price} `}<b>руб</b></span>
         <span>{`${Math.ceil(product.price * 0.85)} `}<b>руб</b></span>
       </div>
     </>;
-    buttonText = 'Хочу!';
+    buttonText = 'Добавить в корзину';
+    if(mainPage) {
+      promoProductCard = 'promoProductCard';
+      buttonText = 'Хочу!';
+    }
   } else {
     promoConditionTrueFalse = <span>{`${product.price} р`}</span>;
     buttonText = 'Добавить в корзину';
