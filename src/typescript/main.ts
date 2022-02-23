@@ -4,7 +4,7 @@ export interface Product {
   price: number,
   type: string,
   promo: boolean,
-  ingredients: IngredientsForProduct[]
+  ingredients: IngredientsForProduct[] | null
 }
 interface IngredientsForProduct {
   ingredTitle: string,
