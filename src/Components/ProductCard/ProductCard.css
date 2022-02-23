@@ -1,0 +1,84 @@
+.ProductCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 400px;
+  width: calc((100% - 40px * 4) / 5);
+  padding: 20px 18px 5px 18px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+  color: #000000;
+  box-shadow: 0 0 10px gray;
+}
+.promoProductCard{
+  width: calc((100% - 70px * 2) / 3);
+}
+.productCardImage {
+  object-fit: cover;
+  width: 100%;
+  height: 165px;
+  margin-bottom: 18px;
+}
+.productCardTitle {
+  font-weight: 500;
+}
+.productCardInfo span:first-of-type {
+  margin-right: 30px;
+}
+hr {
+  border: 0.5px solid #A4ACAD;
+}
+.addToCardBtnBar {
+  display: flex;
+  justify-content: space-between;
+}
+.addToCardBtn {
+  background: #F46D40;
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: none;
+  width: 50%;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 18px;
+  color: #FFFFFF;
+  position: relative;
+  left: 50%;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.addToCardBtnPromo {
+  left: 0%;
+}
+.addToCardBtn:hover {
+  transition: 1s;
+  color: black;
+}
+.addToCardBtn::before {
+  position: absolute;
+  top: -3px;
+  right: 0;
+  content: '';
+  width: 200%;
+  padding: 0.5px;
+  background: #A4ACAD;
+}
+.productCardTitle, .productCardInfo {
+  margin: 0;
+}
+.promoWeight {
+  color: #A4ACAD;
+}
+.promoPrice {
+  font-family: serif;
+  display: flex;
+  flex-direction: column;
+}
+.promoPrice span:first-child {
+  text-decoration: line-through;
+}
