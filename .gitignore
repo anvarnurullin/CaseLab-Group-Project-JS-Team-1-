@@ -12,6 +12,7 @@
 /build
 /backend/src/dataBase/connection.ts
 /backend/node_modules
+/backend/build
 
 # misc
 .DS_Store
