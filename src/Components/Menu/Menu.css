@@ -1,0 +1,12 @@
+.Menu h1 {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 42px;
+}
+.Menu hr {
+  width: calc(100% + 120px);
+  position: relative;
+  left: -60px;
+}

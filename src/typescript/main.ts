@@ -4,6 +4,7 @@ export interface Product {
   price: number,
   type: string,
   promo: boolean,
+  imagePath: string,
   ingredients: IngredientsForProduct[] | null
 }
 interface IngredientsForProduct {
