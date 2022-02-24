@@ -10,7 +10,11 @@
 
 # production
 /build
-
+/backend/src/dataBase/connection.ts
+/backend/node_modules
+/backend/build/dataBase/connection.js
+/backend/
+/!!!
 # misc
 .DS_Store
 .env.local
