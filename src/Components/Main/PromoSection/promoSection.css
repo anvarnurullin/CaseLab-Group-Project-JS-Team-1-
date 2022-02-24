@@ -1,0 +1,14 @@
+.promoSectionProducts {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.promoSection h2 {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 42px;
+  padding: 15px;
+  text-align: center;
+}

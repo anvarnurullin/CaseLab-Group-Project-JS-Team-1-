@@ -1,0 +1,48 @@
+.welcomeSection {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.welcomeWords {
+  padding: 30px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.promoTitle {
+  padding: 10px;
+  font-family: "Open Sans", sans-serif;
+  font-style: bold;
+  font-size: 28px;
+  line-height: 49px;
+  line-height: 100%;
+  text-align: center;
+}
+
+.productCards {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menuButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 10vh;
+}
+
+.menuButton a {
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  background: linear-gradient(to left, #fc4a1a, #f7b733, #fc4a1a);
+  text-decoration: none;
+  padding: 15px 50px;
+  border-radius: 2px;
+  background-size: 200%;
+  transition: 0.5s;
+}
+
+.menuButton a:hover {
+  background-position: right;
+}
