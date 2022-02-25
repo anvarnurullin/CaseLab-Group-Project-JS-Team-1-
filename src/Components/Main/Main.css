@@ -2,18 +2,20 @@
   padding: 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .welcomeWords {
   padding: 30px;
   font-family: "Open Sans", sans-serif;
+  font-size: 36px;
 }
 
 .promoTitle {
   padding: 10px;
   font-family: "Open Sans", sans-serif;
   font-style: bold;
-  font-size: 28px;
+  font-size: 36px;
   line-height: 49px;
   line-height: 100%;
   text-align: center;
@@ -45,4 +47,21 @@
 
 .menuButton a:hover {
   background-position: right;
+}
+
+.aboutUS {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 500;
+  padding: 25px;
+}
+
+.aboutUsTitle {
+  text-align: left;
+  padding: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.aboutUsText {
+  text-align: justify;
+  padding: 0 0 10px 0;
 }

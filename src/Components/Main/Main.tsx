@@ -1,8 +1,5 @@
 import React from "react";
 import welcomePicture from "./welcomePicture.png";
-import productCardImage1 from "./productCardImage1.png";
-import productCardImage2 from "./productCardImage2.png";
-import productCardImage3 from "./productCardImage3.png";
 import "./Main.css";
 import PromoSection from "./PromoSection/PromoSection";
 
@@ -97,15 +94,15 @@ function Main() {
         <a href="#">Меню</a>
       </div>
       <div className="aboutUS">
-        <p>О нас</p>
-        <p>
+        <p className="aboutUsTitle">О нас</p>
+        <p className="aboutUsText">
           Кафе “Шаурма № 1” предлагает своим клиентам вкуснейшую шаурму,
           приготовленную по классическим и адаптированным к европейской
           аудитории рецептам, а также по собственным наработкам наших поваров.
           Сочное мясо и правильные соусы - это то, чем мы по праву можем
           гордиться.
         </p>
-        <p>
+        <p className="aboutUsText">
           В своих блюдах мы используем только натуральные продукты, которые
           поставляют нам проверенные поставщики. Именно поэтому наша шаурма
           отличается свежестью, превосходным качеством и вкусом.
