@@ -1,6 +1,15 @@
+import bodyParser from 'body-parser';
 import express from 'express';
-/* import pg from 'pg'; */
-const app=express();
+import cookieSession from 'cookie-session';
+import { router } from './requests/getRequests';
 
+const app = express();
 
-app.listen(3000,()=>console.log('server listening on port 3000'))
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieSession({ keys: ['lkscdskchj'] }));
+app.use(express.static(__dirname + "/static/"));
+app.use(router);
+
+const PORT = process.env.PORT || 80;
+
+app.listen(PORT);
