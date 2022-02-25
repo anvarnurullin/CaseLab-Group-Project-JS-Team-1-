@@ -13,7 +13,7 @@ function PromoSection({
   const promoSectionProducts = products.map(function (product, index) {
     return (
       <>
-        <ProductCard key={index} product={product} mainPage={false} />
+        <ProductCard key={index} product={product} mainPage={true} />
       </>
     );
   });

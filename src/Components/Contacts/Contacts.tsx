@@ -1,18 +1,17 @@
-import React from 'react';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import { Filial } from '../../typescript/main';
-import Map from './Map';
-import './Contacts.css';
+import React from "react";
+import { Filial } from "../../typescript/main";
+import Map from "./Map";
+import "./Contacts.css";
 
 function Contacts() {
   let data: Filial = {
-    filialTitle: 'Филиал №1',
-    lat: 12.4,
-    lon: 43,
-    phone: '8394859',
-    adress: 'Никольская ул., 10',
-    email: 'bestshaurma@yandex.com',
+    idFilial: 1,
+    filialTitle: "Филиал №1",
+    lat: "12.4",
+    lon: "43",
+    phone: "8394859",
+    adress: "Никольская ул., 10",
+    email: "bestshaurma@yandex.com",
   };
 
   // let branches = () => {
@@ -31,7 +30,6 @@ function Contacts() {
 
   return (
     <div className="Contacts">
-      <Header />
       <div className="ContactsWrapper">
         <div className="MainBranch">
           <p>
@@ -68,7 +66,6 @@ function Contacts() {
           <Map />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

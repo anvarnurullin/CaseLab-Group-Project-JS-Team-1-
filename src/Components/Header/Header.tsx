@@ -1,23 +1,32 @@
 import React from "react";
 import "./Header.css";
+import { useDispatch } from "react-redux";
+import { setMenuAction } from "../../store/menuReducer";
 
 function Header() {
+  const dispatch = useDispatch();
   return (
     <section className="HeaderWrap">
       <header className="Header">
         <a href="#">
-          <img src={logo} className="logo" alt="logo" />
+          <img
+            src="https://caselab-group-1.herokuapp.com/images/logo.png"
+            className="logo"
+            alt="logo"
+          />
         </a>
         <nav>
           <ul className="menu">
             <li>
-              <a href="">Главная</a>
+              <a onClick={() => dispatch(setMenuAction("main"))}>Главная</a>
             </li>
             <li>
-              <a href="">Меню</a>
+              <a onClick={() => dispatch(setMenuAction("menu"))}>Меню</a>
             </li>
             <li>
-              <a href="">Контакты</a>
+              <a onClick={() => dispatch(setMenuAction("contacts"))}>
+                Контакты
+              </a>
             </li>
           </ul>
         </nav>
@@ -29,7 +38,7 @@ function Header() {
         </ul>
         <ul className="headerCart">
           <li>
-            <a href="#">
+            <a onClick={() => dispatch(setMenuAction("cart"))}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="30px"

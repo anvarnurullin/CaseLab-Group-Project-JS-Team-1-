@@ -58,10 +58,12 @@
 .aboutUsTitle {
   text-align: left;
   padding: 0 0 10px 0;
-  font-size: 18px;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 .aboutUsText {
   text-align: justify;
   padding: 0 0 10px 0;
+  font-size: 18px;
 }

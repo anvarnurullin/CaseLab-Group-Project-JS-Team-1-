@@ -1,16 +1,38 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import Menu from './components/Menu/Menu';
-import { RootState } from './store/store';
-import Modal from './components/Modal/Modal'
+import React from "react";
+import Contacts from "./Components/Contacts/Contacts";
+import Footer from "./Components/Footer/Footer";
+import Header from "./Components/Header/Header";
+import Main from "./Components/Main/Main";
+import Menu from "./Components/Menu/Menu";
+import Cart from "./Components/Cart/Cart";
+import { useSelector } from "react-redux";
+import { RootState } from "./store/store";
 
 function App() {
-  const modal = useSelector((state: RootState) => state.modal);
+  let pageContent;
+  const menuValue = useSelector((state: RootState) => state.menu);
 
+  switch (menuValue) {
+    case "main":
+      pageContent = <Main></Main>;
+      break;
+    case "menu":
+      pageContent = <Menu></Menu>;
+      break;
+    case "contacts":
+      pageContent = <Contacts></Contacts>;
+      break;
+    case "cart":
+      pageContent = <Cart></Cart>;
+      break;
+    default:
+      pageContent = <Main></Main>;
+  }
   return (
     <div className="App">
-      <Menu />
-      {(modal) ? <Modal {...modal}/> : <></>}
+      <Header></Header>
+      {pageContent}
+      <Footer></Footer>
     </div>
   );
 }
