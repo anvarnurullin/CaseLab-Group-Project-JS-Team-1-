@@ -1,0 +1,67 @@
+.welcomeSection {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.welcomeWords {
+  padding: 30px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 36px;
+}
+
+.promoTitle {
+  padding: 10px;
+  font-family: "Open Sans", sans-serif;
+  font-style: bold;
+  font-size: 36px;
+  line-height: 49px;
+  line-height: 100%;
+  text-align: center;
+}
+
+.productCards {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menuButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 10vh;
+}
+
+.menuButton a {
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  background: linear-gradient(to left, #fc4a1a, #f7b733, #fc4a1a);
+  text-decoration: none;
+  padding: 15px 50px;
+  border-radius: 2px;
+  background-size: 200%;
+  transition: 0.5s;
+}
+
+.menuButton a:hover {
+  background-position: right;
+}
+
+.aboutUS {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 500;
+  padding: 25px;
+}
+
+.aboutUsTitle {
+  text-align: left;
+  padding: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.aboutUsText {
+  text-align: justify;
+  padding: 0 0 10px 0;
+}
