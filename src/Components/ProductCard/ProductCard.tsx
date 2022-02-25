@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Product } from '../../typescript/main';
 import { useDispatch } from 'react-redux';
 import {showModalAction} from '../../store/modalReducer'
 import './ProductCard.css'
 
 function ProductCard({product, mainPage}: {product:Product, mainPage:boolean}) {
-
   const dispatch = useDispatch();
 
   let promoConditionTrue;
@@ -24,12 +23,18 @@ function ProductCard({product, mainPage}: {product:Product, mainPage:boolean}) {
     promoConditionTrue = <>
       <div className='promoPrice'>
         <span>{`${product.price} `}<b>руб</b></span>
-        <span>{`${Math.ceil(product.price * 0.85)} `}<b>руб</b></span>
+        <span>{`${Math.ceil(+product.price * 0.85)} `}<b>руб</b></span>
       </div>
     </>;
   } else {
     promoConditionTrueFalse = <span>{`${product.price} р`}</span>;
     buttonText = 'Добавить в корзину';
+  }
+
+  function showModal() {
+    if(product.type === "шаурма") {
+      dispatch(showModalAction({product:product, styleModal:'showModal'}));
+    }
   }
 
   return ( 
@@ -39,7 +44,7 @@ function ProductCard({product, mainPage}: {product:Product, mainPage:boolean}) {
       <p className='productCardInfo'><span>{`${product.weight} ${(product.type === "напитки")? 'мл':'г'}`}</span>{promoConditionTrueFalse}</p>
       <div className='addToCardBtnBar'>
         {promoConditionTrue}
-        <button className={`addToCardBtn ${addToCardBtnPromo}`} onClick={() => dispatch(showModalAction({product:product, styleModal:'showModal'}))}>{buttonText}</button>
+        <button className={`addToCardBtn ${addToCardBtnPromo}`} onClick={showModal}>{buttonText}</button>
       </div>
     </div>
   );
