@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Product } from '../../typescript/main';
-import Modal from '../Modal/Modal';
+import { useDispatch } from 'react-redux';
+import {showModalAction} from '../../store/modalReducer'
 import './ProductCard.css'
 
 function ProductCard({product, mainPage}: {product:Product, mainPage:boolean}) {
-  const [modalBlock, showModalBlock] = useState(<></>)
+
+  const dispatch = useDispatch();
+
   let promoConditionTrue;
   let promoConditionTrueFalse;
   let promoProductCard = '';
@@ -29,20 +32,15 @@ function ProductCard({product, mainPage}: {product:Product, mainPage:boolean}) {
     buttonText = 'Добавить в корзину';
   }
 
-  function showModal(product: Product, styleModal: string) {
-    showModalBlock(<Modal product={product} styleModal={styleModal}/>);
-  }
-
   return ( 
     <div className={`ProductCard ${promoProductCard}`}>
       <img className='productCardImage' src={product.imagePath} alt={`Фото ${product.title}`}></img>
       <h3 className='productCardTitle'>{product.title}</h3>
-      <p className='productCardInfo'><span>{`${product.weight} ${(product.type === "Напитки")? 'мл':'г'}`}</span>{promoConditionTrueFalse}</p>
+      <p className='productCardInfo'><span>{`${product.weight} ${(product.type === "напитки")? 'мл':'г'}`}</span>{promoConditionTrueFalse}</p>
       <div className='addToCardBtnBar'>
         {promoConditionTrue}
-        <button className={`addToCardBtn ${addToCardBtnPromo}`} onClick={() => showModal(product, 'showModal')}>{buttonText}</button>
+        <button className={`addToCardBtn ${addToCardBtnPromo}`} onClick={() => dispatch(showModalAction({product:product, styleModal:'showModal'}))}>{buttonText}</button>
       </div>
-      {modalBlock}
     </div>
   );
 }

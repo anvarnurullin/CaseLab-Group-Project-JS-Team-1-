@@ -1,11 +1,10 @@
 import React from "react";
-import logo from "./logo.png";
 import "./Header.css";
 
 function Header() {
   return (
     <div className="Header">
-      <img src={logo} alt="Здесь логтип" />
+      <img alt="Здесь логтип" />
       <div className="navigation">
         <button>Главная</button>
         <button>Меню</button>

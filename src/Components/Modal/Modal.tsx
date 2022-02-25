@@ -20,7 +20,6 @@ function Modal({product, styleModal}:{product:Product, styleModal:string}) {
   })
   return ( 
     <div className={`Modal ${styleModal}`}>
-      <div className='ModalCard'>
         <img className='modalCardImage' src={product.imagePath} alt={`Фото ${product.title}`}></img>
         <h3 className='modalCardTitle'>{product.title}</h3>
         <hr></hr>
@@ -28,7 +27,6 @@ function Modal({product, styleModal}:{product:Product, styleModal:string}) {
         <h4 className='modalCardPrice'>Цена</h4>
         {promoCondition}
         <button className='addToCardModalBtn'>Добавить в корзину</button>
-      </div>
     </div>
   );
 }
