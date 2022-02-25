@@ -1,0 +1,61 @@
+.Modal {
+  display: none;
+  background: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100vw;
+  height: 100vh;
+}
+.Modal.showModal {
+  display: flex;
+  justify-content: center;
+  overflow-y: hidden;
+}
+.ModalCard {
+  box-sizing: border-box;
+  max-width: 950px;
+  min-width: 570px;
+  width: 45%;
+  padding: 30px 10% 10px 10%;
+  background: #FFFFFF;
+  text-align: center;
+  position: relative;
+  top: 50px;
+  height: fit-content;
+}
+.modalCardImage {
+  object-fit: cover;
+  width: 90%;
+}
+.modalCardPrice::after {
+  content: '';
+  width: 40%;
+  height: 1px;
+  background: #A4ACAD;
+  position: absolute;
+  transform: translate(-60%, 30px);
+}
+.addToCardModalBtn {
+  background: #F46D40;
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: none;
+  width: 50%;
+  max-width: 150px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 18px;
+  color: #FFFFFF;
+  position: relative;
+  left: 50%;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.addToCardModalBtn:hover {
+  transition: 1s;
+  color: black;
+}

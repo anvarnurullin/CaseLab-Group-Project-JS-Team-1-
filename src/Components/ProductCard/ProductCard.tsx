@@ -1,17 +1,17 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import { Product } from '../../typescript/main';
+import Modal from '../Modal/Modal';
 import './ProductCard.css'
 
 function ProductCard({product, mainPage}: {product:Product, mainPage:boolean}) {
+  const [modalBlock, showModalBlock] = useState(<></>)
   let promoConditionTrue;
   let promoConditionTrueFalse;
-  let promoWeight = '';
   let promoProductCard = '';
   let buttonText;
   let addToCardBtnPromo = '';
   if(product.promo) {
     addToCardBtnPromo = 'addToCardBtnPromo';
-    promoWeight = 'promoWeight';
     buttonText = 'Добавить в корзину';
     if(mainPage) {
       promoProductCard = 'promoProductCard';
@@ -28,16 +28,21 @@ function ProductCard({product, mainPage}: {product:Product, mainPage:boolean}) {
     promoConditionTrueFalse = <span>{`${product.price} р`}</span>;
     buttonText = 'Добавить в корзину';
   }
+
+  function showModal(product: Product, styleModal: string) {
+    showModalBlock(<Modal product={product} styleModal={styleModal}/>);
+  }
+
   return ( 
     <div className={`ProductCard ${promoProductCard}`}>
       <img className='productCardImage' src={product.imagePath} alt={`Фото ${product.title}`}></img>
       <h3 className='productCardTitle'>{product.title}</h3>
-      <p className='productCardInfo'><span className={promoWeight}>{`${product.weight} ${(product.type === "Напитки")? 'мл':'г'}`}</span>{promoConditionTrueFalse}</p>
+      <p className='productCardInfo'><span>{`${product.weight} ${(product.type === "Напитки")? 'мл':'г'}`}</span>{promoConditionTrueFalse}</p>
       <div className='addToCardBtnBar'>
         {promoConditionTrue}
-        <button className={`addToCardBtn ${addToCardBtnPromo}`}>{buttonText}</button>
+        <button className={`addToCardBtn ${addToCardBtnPromo}`} onClick={() => showModal(product, 'showModal')}>{buttonText}</button>
       </div>
-      
+      {modalBlock}
     </div>
   );
 }

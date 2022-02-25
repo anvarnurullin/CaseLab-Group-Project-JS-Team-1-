@@ -29,6 +29,7 @@
 }
 .productCardInfo span:first-of-type {
   margin-right: 30px;
+  color: #A4ACAD;
 }
 hr {
   border: 0.5px solid #A4ACAD;
@@ -73,9 +74,6 @@ hr {
 }
 .productCardTitle, .productCardInfo {
   margin: 0;
-}
-.promoWeight {
-  color: #A4ACAD;
 }
 .promoPrice {
   font-family: serif;

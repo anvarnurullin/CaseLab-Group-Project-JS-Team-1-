@@ -7,7 +7,7 @@ export interface Product {
   imagePath: string,
   ingredients: IngredientsForProduct[] | null
 }
-interface IngredientsForProduct {
+export interface IngredientsForProduct {
   ingredTitle: string,
   ingredQuantity: number
 }
