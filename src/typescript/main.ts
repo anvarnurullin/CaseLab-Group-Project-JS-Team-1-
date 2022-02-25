@@ -1,26 +1,39 @@
 export interface Product {
-  title: string;
-  weight: number;
-  price: number;
-  type: string;
-  promo: boolean;
-  imagePath: string;
-  ingredients: IngredientsForProduct[] | null;
+  idProduct: number, 
+  title: string,
+  weight: string,
+  price: string,
+  type: string,
+  promo: boolean,
+  imagePath: string,
+  ingredients: IngredientsForProduct[] | null
 }
 export interface IngredientsForProduct {
-  ingredTitle: string;
-  ingredQuantity: number;
+  idIngredient: number,
+  ingredTitle: string,
+  ingredQuantity: number,
+  ingredPrice: string
 }
 export interface Order {
-  name: string;
-  phone: string;
-  orderList: IngredientsForProduct[];
+  name: string,
+  phone: string,
+  orderList: OrderList[]
+}
+export interface OrderList {
+  idProduct: number,
+  productQuantity: number,
+  ingrediantList: ingrediantList[]
+}
+export interface ingrediantList {
+  idIngredient: number,
+  newIngredQuantity: number
 }
 export interface Filial {
-  filialTitle: string;
-  lat: number;
-  lon: number;
-  phone: string;
-  adress: string;
-  email: string;
+  idFilial: number,
+  filialTitle: string,
+  lat: string,
+  lon: string,
+  phone: string,
+  adress: string,
+  email: string
 }
