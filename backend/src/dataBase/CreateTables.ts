@@ -1,10 +1,13 @@
-const connection=require('./connection.ts');
+import { QueryResult } from "pg";
+
+var connection = require('./connection.js');
 connection.connect()
 if(connection){
     console.log('database connection')
 }
 
-/* connection.query(`
+//Create table "Filials"
+connection.query(`
     CREATE SCHEMA IF NOT EXISTS shawarma;
     CREATE TABLE shawarma."Filials"
   (
@@ -20,111 +23,115 @@ if(connection){
   
     ALTER TABLE IF EXISTS shawarma."Filials"
       OWNER to dnkwwjkgcebqou;
-      `, (err, res) => {
+      `, (err: Error, res: QueryResult) => {
       if (err) throw err;
       if(res) {
         console.log('Table created')
       }
     });
- */
-    /* connection.query(`
-        CREATE SCHEMA IF NOT EXISTS shawarma;
-        CREATE TABLE shawarma."Products"
-      (
-          "idProduct" serial NOT NULL,
-          title character varying NOT NULL,
-          weight numeric NOT NULL,
-          price numeric NOT NULL,
-          type character varying NOT NULL,
-          promo boolean NOT NULL,
-          "imagePath" character varying,
-          PRIMARY KEY ("idProduct")
-      );
-      
-      ALTER TABLE IF EXISTS shawarma."Products"
-        OWNER to dnkwwjkgcebqou;
-      `, (err, res) => {
-        if (err) throw err;
-        if(res) {
-          console.log('Table created')
-        }
-      }); */
 
-     /*  connection.query(`
-        CREATE SCHEMA IF NOT EXISTS shawarma;
-      
-        CREATE TABLE shawarma."Orders"
-      (
-          "idOrder" serial NOT NULL,
-          name character varying NOT NULL,
-          phone character varying NOT NULL,
-          PRIMARY KEY ("idOrder")
-      );
-      
-        ALTER TABLE IF EXISTS shawarma."Orders"
-          OWNER to dnkwwjkgcebqou;
-      
-      `, (err, res) => {
-        if (err) throw err;
-        if(res) {
-          console.log('Table created')
-        }
-      }); */
+//Create table "Products"
+connection.query(`
+    CREATE SCHEMA IF NOT EXISTS shawarma;
+    CREATE TABLE shawarma."Products"
+  (
+      "idProduct" serial NOT NULL,
+      title character varying NOT NULL,
+      weight numeric NOT NULL,
+      price numeric NOT NULL,
+      type character varying NOT NULL,
+      promo boolean NOT NULL,
+      "imagePath" character varying,
+      PRIMARY KEY ("idProduct")
+  );
+  
+  ALTER TABLE IF EXISTS shawarma."Products"
+    OWNER to dnkwwjkgcebqou;
+  `, (err: Error, res: QueryResult) => {
+    if (err) throw err;
+    if(res) {
+      console.log('Table created')
+    }
+  });
 
-  /*     connection.query(`
-      CREATE TABLE shawarma."Ingredients"
-      (
-          "idIngredient" serial NOT NULL,
-          "ingredTitle" character varying NOT NULL,
-          "ingredQuantity" integer NOT NULL,
-          "Products_idProduct" serial NOT NULL,
-          PRIMARY KEY ("idIngredient"),
-          CONSTRAINT "Products_idProduct" FOREIGN KEY ("Products_idProduct")
-              REFERENCES shawarma."Products" ("idProduct") MATCH SIMPLE
-              ON UPDATE NO ACTION
-              ON DELETE NO ACTION
-              NOT VALID
-      );
-      
-      ALTER TABLE IF EXISTS shawarma."Ingredients"
-          OWNER to dnkwwjkgcebqou;
-      
-      `, (err, res) => {
-        if (err) throw err;
-        if(res) {
-          console.log('Table created')
-        }
-      }); */
+//Create table "Orders"
+connection.query(`
+  CREATE SCHEMA IF NOT EXISTS shawarma;
 
-
- /*      connection.query(`
-      CREATE TABLE shawarma."ProductsOrderList"
+  CREATE TABLE shawarma."Orders"
 (
-    "productQuantity" integer NOT NULL,
+    "idOrder" serial NOT NULL,
+    name character varying NOT NULL,
+    phone character varying NOT NULL,
+    PRIMARY KEY ("idOrder")
+);
+
+  ALTER TABLE IF EXISTS shawarma."Orders"
+    OWNER to dnkwwjkgcebqou;
+
+`, (err: Error, res: QueryResult) => {
+  if (err) throw err;
+  if(res) {
+    console.log('Table created')
+  }
+});
+
+//Create table "Ingredients"
+connection.query(`
+CREATE TABLE shawarma."Ingredients"
+(
+    "idIngredient" serial NOT NULL,
+    "ingredTitle" character varying NOT NULL,
+    "ingredQuantity" integer NOT NULL,
     "Products_idProduct" serial NOT NULL,
-    "Orders_idOrder" serial NOT NULL,
+    PRIMARY KEY ("idIngredient"),
     CONSTRAINT "Products_idProduct" FOREIGN KEY ("Products_idProduct")
         REFERENCES shawarma."Products" ("idProduct") MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-        NOT VALID,
-    CONSTRAINT "Orders_idOrder" FOREIGN KEY ("Orders_idOrder")
-        REFERENCES shawarma."Orders" ("idOrder") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID
 );
 
-ALTER TABLE IF EXISTS shawarma."ProductsOrderList"
+ALTER TABLE IF EXISTS shawarma."Ingredients"
     OWNER to dnkwwjkgcebqou;
-    `, (err, res) => {
-        if (err) throw err;
-        if(res) {
-          console.log('Table created')
-        }
-      }); */
 
-      connection.query(`
+`, (err: Error, res: QueryResult) => {
+  if (err) throw err;
+  if(res) {
+    console.log('Table created')
+  }
+});
+
+//Create table "ProductsOrderList"
+connection.query(`
+    CREATE TABLE shawarma."ProductsOrderList"
+(
+  "productQuantity" integer NOT NULL,
+  "Products_idProduct" serial NOT NULL,
+  "Orders_idOrder" serial NOT NULL,
+  CONSTRAINT "Products_idProduct" FOREIGN KEY ("Products_idProduct")
+      REFERENCES shawarma."Products" ("idProduct") MATCH SIMPLE
+      ON UPDATE NO ACTION
+      ON DELETE NO ACTION
+      NOT VALID,
+  CONSTRAINT "Orders_idOrder" FOREIGN KEY ("Orders_idOrder")
+      REFERENCES shawarma."Orders" ("idOrder") MATCH SIMPLE
+      ON UPDATE NO ACTION
+      ON DELETE NO ACTION
+      NOT VALID
+);
+
+ALTER TABLE IF EXISTS shawarma."ProductsOrderList"
+  OWNER to dnkwwjkgcebqou;
+  `, (err: Error, res: QueryResult) => {
+      if (err) throw err;
+      if(res) {
+        console.log('Table created')
+      }
+    });
+
+//Create table "AddIngredient"
+connection.query(`
       CREATE TABLE shawarma."AddIngredient"
 (
     "newIngredQuantity" integer NOT NULL,
@@ -144,7 +151,7 @@ ALTER TABLE IF EXISTS shawarma."ProductsOrderList"
 
 ALTER TABLE IF EXISTS shawarma."AddIngredient"
     OWNER to dnkwwjkgcebqou;
-    `, (err, res) => {
+    `, (err: Error, res: QueryResult) => {
         if (err) throw err;
         if(res) {
           console.log('Table created')
