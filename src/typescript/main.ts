@@ -21,8 +21,10 @@ export interface Order {
 }
 export interface OrderList {
   idProduct: number,
+  title: string,
+  price: string,
   productQuantity: number,
-  ingrediantList: ingrediantList[]
+  ingrediantList: ingrediantList[] | null
 }
 export interface ingrediantList {
   idIngredient: number,

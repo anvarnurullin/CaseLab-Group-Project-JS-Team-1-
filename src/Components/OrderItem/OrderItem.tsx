@@ -1,15 +1,20 @@
-import React, { FC, ChangeEvent, useState } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
+import {OrderList} from '../../typescript/main'
+import { removeOrderItemAction } from "../../store/orderListReducer";
 import "./OrderItem.css";
+import { decreaseCounterAction } from "../../store/cartCounterReducer";
 
 const arr = [];
 
-function OrderItem() {
+function OrderItem({idOrderItem, orderItem}:{idOrderItem:number, orderItem:OrderList}) {
+
+  const dispatch = useDispatch();
+
   const [count1, setCount1] = React.useState(1);
-  const [count2, setCount2] = React.useState(1);
-  const price1 = 299;
-  const price2 = 274;
+  const price1 = +orderItem.price;
+
   const summ1 = price1 * count1;
-  const summ2 = price2 * count2;
 
   const plus1 = () => {
     setCount1(count1 + 1);
@@ -20,22 +25,17 @@ function OrderItem() {
       setCount1(count1 - 1);
     }
   };
+  function deleteFromCart(){
+    dispatch(removeOrderItemAction(idOrderItem));
+    dispatch(decreaseCounterAction());
+  }
 
-  const plus2 = () => {
-    setCount2(count2 + 1);
-  };
-
-  const minus2 = () => {
-    if (count2 > 1) {
-      setCount2(count2 - 1);
-    }
-  };
 
   return (
     <div className="OrderItem">
       <div className="OrderItemDocher">
         <div className="Description Shaurma">
-          <h3>Шаурма 4 сыра</h3>
+          <h3>{orderItem.title}</h3>
         </div>
         <div className="Counter">
           <div>
@@ -48,7 +48,7 @@ function OrderItem() {
             </button>
           </div>
           <div id="Summ">{summ1}</div>
-          <div id="Delete">X</div>
+          <div id="Delete" onClick={deleteFromCart}>X</div>
         </div>
       </div>
     </div>

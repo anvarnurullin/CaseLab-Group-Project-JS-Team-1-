@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Cart.css";
 import Todo from "./CartTS/CartTS";
-import OrderItem from "../OrderItem/OrderItem";
+import OrderList from "../OrderList/OrderList"
 
 interface IAppState {
   name: string;
@@ -27,7 +27,7 @@ class Cart extends Component<any, IAppState> {
     return (
       <div className="Cart">
         <div className="orderItem">
-          <OrderItem></OrderItem>
+          <OrderList />
         </div>
         <form className="wrap">
           <fieldset className="field-area1">

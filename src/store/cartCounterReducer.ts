@@ -7,11 +7,12 @@ export const cartCounterReducer = (
   switch (action.type) {
     case "increaseCounter":
       return ++state;
+    case "decreaseCounter":
+      return --state;
     default:
       return state;
   }
 };
 
-export const cartCounterAction = () => ({
-  type: "increaseCounter"
-});
+export const increaseCounterAction = () => ({type: "increaseCounter"});
+export const decreaseCounterAction = () => ({type: "decreaseCounter"});
