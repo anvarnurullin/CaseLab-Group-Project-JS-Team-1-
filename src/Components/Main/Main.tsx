@@ -69,7 +69,7 @@ function Main() {
     },
   ];
   return (
-    <section className="Main">
+    <div className="Main">
       <div className="welcomeSection">
         <div className="welcomeWords">
           <p>Неважно, что ты ешь шаверму, </p>
@@ -77,10 +77,13 @@ function Main() {
           <p>состав везде один и тот же,</p>
           <p>муму</p>
         </div>
-        <img
-          src="https://caselab-group-1.herokuapp.com/images/welcomeImage.png"
-          alt="Картинка с шаурмой"
-        />
+        <div className="welcomePicture">
+          <img
+            src="https://caselab-group-1.herokuapp.com/images/welcomeImage.png"
+            alt="Картинка с шаурмой"
+            className="welcomePicture"
+          />
+        </div>
       </div>
       <PromoSection
         title="Акция дня (успей полакомиться)"
@@ -104,7 +107,7 @@ function Main() {
           отличается свежестью, превосходным качеством и вкусом.
         </p>
       </div>
-    </section>
+    </div>
   );
 }
 
