@@ -1,13 +1,13 @@
 import React from "react";
-import Contacts from "./components/Contacts/Contacts";
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
-import Main from "./components/Main/Main";
-import Menu from "./components/Menu/Menu";
-import Cart from "./components/Cart/Cart";
+import Contacts from "./Components/Contacts/Contacts";
+import Footer from "./Components/Footer/Footer";
+import Header from "./Components/Header/Header";
+import Main from "./Components/Main/Main";
+import Menu from "./Components/Menu/Menu";
+import Cart from "./Components/Cart/Cart";
 import { useSelector } from "react-redux";
 import { RootState } from "./store/store";
-import Modal from './components/Modal/Modal';
+import Modal from './Components/Modal/Modal';
 
 function App() {
   let pageContent;
