@@ -1,12 +1,18 @@
-import React, {useState} from "react";
-import {IngredientsForProduct} from '../../../typescript/main';
+import React, {useState, useEffect} from "react";
+import {IngredientsForProduct, ingrediantList} from '../../../typescript/main';
 import { useDispatch } from 'react-redux';
 import {increasePriceAction, decreasePriceAction} from '../../../store/cardPriceReducer'
 import './IngredientList.css'
 
 
-function IngredientList({ingredient}:{ingredient:IngredientsForProduct}) {
+function IngredientList({ingredient, changeIngred}:{ingredient:IngredientsForProduct, changeIngred:any}) {
   const [ingredientQuantity, setIngredQuantity] = useState(ingredient.ingredQuantity);
+  useEffect(() => {
+    if(ingredientQuantity !== ingredient.ingredQuantity) {
+      changeIngred({idIngredient:ingredient.idIngredient, newIngredQuantity:ingredientQuantity});
+    }
+  }, [ingredientQuantity]);
+  
   const dispatch = useDispatch();
   if(isNaN(ingredientQuantity)) {
     setIngredQuantity(ingredient.ingredQuantity)

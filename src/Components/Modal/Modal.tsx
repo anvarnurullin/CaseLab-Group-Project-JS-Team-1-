@@ -1,20 +1,40 @@
-import React, { useEffect } from 'react';
-import { Product } from '../../typescript/main';
+import React, { useEffect, useState } from 'react';
+import { ingrediantList, Product } from '../../typescript/main';
 import { useDispatch, useSelector } from 'react-redux';
 import IngredientList from './IngredientList/IngredientList';
-import {increasePriceAction, setPriceAction} from '../../store/cardPriceReducer';
+import {setPriceAction} from '../../store/cardPriceReducer';
 import { RootState } from '../../store/store';
-import {cartCounterAction} from '../../store/cartCounterReducer';
+import {increaseCounterAction} from '../../store/cartCounterReducer';
 import { hideModalAction } from '../../store/showModalReducer';
+import {addOrderItemAction} from '../../store/orderListReducer';
 import './Modal.css';
 
 
 function Modal({product}:{product:Product}) {
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setPriceAction(+product.price));
   }, [])
+  const dispatch = useDispatch();
+  const id = useSelector((state:RootState) => state.cartCounter);
   const price = useSelector((state: RootState) => state.cardPrice);
+  const [newIngredQuantity, changeIngredQuantity] = useState([])
+
+  function changeIngred(newQuantity: ingrediantList) {
+    if(newIngredQuantity.length === 0) {
+      //@ts-expect-error
+      changeIngredQuantity([newQuantity]);
+      return;
+    }
+    newIngredQuantity.forEach(function(item: ingrediantList, index: number){
+      if(item.idIngredient == newQuantity.idIngredient) {
+        //@ts-expect-error
+        changeIngredQuantity([...newIngredQuantity.slice(0, index), newQuantity, ...newIngredQuantity.slice(index+1)])
+      } else {
+        //@ts-expect-error
+        changeIngredQuantity([...newIngredQuantity, newQuantity])
+      }
+    })
+  }
 
   let promoCondition;
   if(product.promo) {
@@ -28,10 +48,22 @@ function Modal({product}:{product:Product}) {
     promoCondition = <div className='modalCardPriceValue'>{`${price} р`}</div>;
   }
   const ingredientsList = product.ingredients?.map(function(ingredient, index){
-    return <IngredientList key={index} ingredient={ingredient}/>
+    return <IngredientList key={index} ingredient={ingredient} changeIngred={changeIngred}/>
   })
   function handleAddCardBtn(){
-    dispatch(cartCounterAction());
+    dispatch(increaseCounterAction());
+    dispatch(addOrderItemAction(
+      {
+        idOrderItem: id + 1,
+        orderItem: {
+          idProduct: product.idProduct,
+          title: product.title,
+          price: `${price}`,
+          productQuantity: 1,
+          ingrediantList: (newIngredQuantity.length === 0) ? null : newIngredQuantity
+        }
+      }
+    ))
     dispatch(hideModalAction());
   }
   return ( 

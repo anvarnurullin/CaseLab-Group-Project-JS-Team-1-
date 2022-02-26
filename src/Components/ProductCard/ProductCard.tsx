@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Product } from '../../typescript/main';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {setModalAction} from '../../store/modalReducer';
 import {showModalAction} from '../../store/showModalReducer'
-import {cartCounterAction} from '../../store/cartCounterReducer';
+import {increaseCounterAction} from '../../store/cartCounterReducer';
+import {addOrderItemAction} from '../../store/orderListReducer';
 import './ProductCard.css'
+import { RootState } from '../../store/store';
 
 function ProductCard({product, mainPage}: {product:Product, mainPage:boolean}) {
+  const id = useSelector((state:RootState) => state.cartCounter)
   const dispatch = useDispatch();
 
   let promoConditionTrue;
@@ -38,7 +41,19 @@ function ProductCard({product, mainPage}: {product:Product, mainPage:boolean}) {
       dispatch(setModalAction({product:product}));
       dispatch(showModalAction());
     } else {
-      dispatch(cartCounterAction());
+      dispatch(increaseCounterAction());
+      dispatch(addOrderItemAction(
+        {
+          idOrderItem: id + 1,
+          orderItem: {
+            idProduct: product.idProduct,
+            title: product.title,
+            price: product.price,
+            productQuantity: 1,
+            ingrediantList: null
+          }
+        }
+      ))
     }
   }
 
