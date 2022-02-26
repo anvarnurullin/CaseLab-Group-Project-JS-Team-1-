@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Branches from './Branches';
 import {
   GoogleMap,
   InfoWindow,
@@ -7,19 +8,9 @@ import {
 } from '@react-google-maps/api';
 
 const center = {
-  lat: 55.72647,
-  lng: 37.5796,
+  lat: 55.744,
+  lng: 37.61,
 };
-
-const marker = [
-  {
-    id: 1,
-    name: 'Шаурма № 1 на Комсомольской',
-    address: 'Комсомольский проспект, 28',
-    phone: '+ 996 705 188 955',
-    position: { lat: 55.72637, lng: 37.5796 },
-  },
-];
 
 const containerStyle = {
   width: '100%',
@@ -45,22 +36,22 @@ function Map() {
     <GoogleMap
       onClick={() => setActiveMarker(null)}
       center={center}
-      zoom={18}
+      zoom={13}
       mapContainerStyle={containerStyle}
     >
-      {marker.map(({ id, name, address, position, phone }) => (
+      {Branches.map(({ idFilial, filialTitle, adress, lat, lon, phone }) => (
         <Marker
-          key={id}
-          position={position}
-          onClick={() => handleActiveMarker(id)}
+          key={idFilial}
+          position={{ lat: Number(lat), lng: Number(lon) }}
+          onClick={() => handleActiveMarker(idFilial)}
         >
-          {activeMarker === id ? (
+          {activeMarker === idFilial ? (
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>
               <div>
                 <p>
-                  <b>{name}</b>
+                  <b>{filialTitle}</b>
                 </p>
-                <p>{address}</p>
+                <p>{adress}</p>
                 <p>{phone}</p>
               </div>
             </InfoWindow>
