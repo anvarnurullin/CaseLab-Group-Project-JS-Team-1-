@@ -36,7 +36,7 @@ function Map() {
     <GoogleMap
       onClick={() => setActiveMarker(null)}
       center={center}
-      zoom={13}
+      zoom={12}
       mapContainerStyle={containerStyle}
     >
       {Branches.map(({ idFilial, filialTitle, adress, lat, lon, phone }) => (
