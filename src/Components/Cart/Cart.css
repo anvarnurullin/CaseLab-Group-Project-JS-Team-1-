@@ -1,39 +1,6 @@
-/* .App {
-  text-align: center;
-
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
 
 input {
+  border:none;
   width: 284px;
   height: 40px;
   right: 1207px;
@@ -45,17 +12,46 @@ input {
 }
 
 .Cart {
+ 
   padding: 30px;
 }
 
-.submitBtn {
+button.submitBtn {
+  
   width: 277px;
   height: 45px;
   right: 433px;
   border-radius: 5px;
   background: #f46d40;
   font-size: 14px;
+  margin: 10px 0px 10px 4px;
+
 }
-h1 {
-  margin: 1em 1em 1em 1em;
+h2 {
+  margin: 1em 1em 1em 2em;
+  
 }
+.cart_modal >.modalCard{
+  overflow:auto;
+  padding:100px;
+ 
+}
+
+fieldset.field-area{
+
+margin: 1em 1em 1em 1em;
+margin-bottom:20px;
+border:1px solid #000;
+margin-left:-1px;
+
+}
+form{
+
+  padding:213px;
+  width: 300px;
+}
+
+fieldset.field-area1{
+  border:none;
+}
+
