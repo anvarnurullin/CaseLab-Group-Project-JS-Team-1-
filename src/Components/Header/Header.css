@@ -10,7 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   position: sticky;
   top: 0;
   z-index: 999;
@@ -56,12 +56,12 @@
 
 .navbarLinks svg {
   cursor: pointer;
-  fill: #f46d40;
+  fill: #000;
 }
 
 .navbarLinks svg:hover {
   cursor: pointer;
-  fill: #252b42;
+  fill: #f77062;
   transition: all 0.3s ease;
 }
 
