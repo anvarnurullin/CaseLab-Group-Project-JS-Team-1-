@@ -1,15 +1,12 @@
 import {Product} from '../typescript/main'
 
-export const modalReducer = (state:null|{product: Product, styleModal: string} = null, action: {type: string, payload: {product: Product, styleModal: string}|null}) => {
+export const modalReducer = (state:null|{product: Product, styleModal: string} = null, action: {type: string, payload: {product: Product}}) => {
   switch (action.type) {
-    case 'showModal':
-      return (state) ? {...state, ...action.payload} : {...action.payload};
-    case 'closeModal':
+    case 'setModal':
       return (state) ? {...state, ...action.payload} : {...action.payload};
     default:
       return state
   }
 }
 
-export const showModalAction = (payload: {product: Product, styleModal: string}) => ({type: 'showModal', payload});
-export const closeModalAction = (payload: {product: Product, styleModal: string}) => ({type: 'showModal', payload});
+export const setModalAction = (payload: {product: Product}) => ({type: 'setModal', payload});

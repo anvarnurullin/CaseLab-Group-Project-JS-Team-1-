@@ -7,10 +7,13 @@ import Menu from "./components/Menu/Menu";
 import Cart from "./components/Cart/Cart";
 import { useSelector } from "react-redux";
 import { RootState } from "./store/store";
+import Modal from './components/Modal/Modal';
 
 function App() {
   let pageContent;
   const menuValue = useSelector((state: RootState) => state.menu);
+  const modal = useSelector((state: RootState) => state.showModal);
+  const modalValue = useSelector((state: RootState) => state.modal);
 
   switch (menuValue) {
     case "main":
@@ -33,6 +36,7 @@ function App() {
       <Header></Header>
       {pageContent}
       <Footer></Footer>
+      {(modal) ? <Modal {...modalValue} /> : <></>}
     </div>
   );
 }

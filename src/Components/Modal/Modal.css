@@ -1,5 +1,7 @@
 .Modal {
-  display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: rgba(0, 0, 0, 0.25);
   position: fixed;
   top: 0;
@@ -24,11 +26,6 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: normal;
-}
-.Modal.showModal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .modalCardImage {
   object-fit: cover;

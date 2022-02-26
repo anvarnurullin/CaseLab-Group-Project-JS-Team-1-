@@ -43,6 +43,7 @@
   border-radius: 2px;
   background-size: 200%;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .menuButton a:hover {
