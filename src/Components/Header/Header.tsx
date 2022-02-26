@@ -15,13 +15,14 @@ function Header() {
   return (
     <div className="Header">
       <div className="navbarContainer">
-        <a>
+        <div>
           <img
             src="https://caselab-group-1.herokuapp.com/images/logo.png"
             className="logo"
             alt="logo"
           />
-        </a>
+        </div>
+
         <div
           className={"navbarToggle" + (!navbarState ? "" : " is-active")}
           onClick={navbarStateUpdate}
@@ -56,14 +57,7 @@ function Header() {
               Контакты
             </a>
           </li>
-          {/* <li className="navbarItem">
-            <ul className="headerContacts">
-              <li>Наш телефон:</li>
-              <li>+996 705 188 955</li>
-              <li>+996 555 188 955</li>
-              <li>работаем с 10:00 до 00:00</li>
-            </ul>
-          </li> */}
+
           <li className="navbarItem">
             <a
               onClick={() => dispatch(setMenuAction("cart"))}
@@ -83,6 +77,14 @@ function Header() {
             <span className="cartCounter">{cartCounter}</span>
           </li>
         </ul>
+        <div className="headerContacts">
+          <ul className="headerContacts">
+            <li>Наш телефон:</li>
+            <li>+996 705 188 955</li>
+            <li>+996 555 188 955</li>
+            <li>работаем с 10:00 до 00:00</li>
+          </ul>
+        </div>
       </div>
     </div>
   );
