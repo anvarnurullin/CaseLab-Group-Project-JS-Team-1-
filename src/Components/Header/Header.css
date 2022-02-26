@@ -98,8 +98,11 @@
   }
 
   .navbarLinks svg {
-    cursor: pointer;
     fill: #fff;
+  }
+
+  .navbarLinks svg:hover {
+    fill: #252b42;
   }
 
   .navbarMenu {
