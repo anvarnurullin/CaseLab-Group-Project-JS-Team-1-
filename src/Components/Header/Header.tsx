@@ -1,46 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.css";
 import { useDispatch, useSelector } from "react-redux";
-import {RootState} from '../../store/store'
+import { RootState } from "../../store/store";
 import { setMenuAction } from "../../store/menuReducer";
 
 function Header() {
   const dispatch = useDispatch();
   const cartCounter = useSelector((state: RootState) => state.cartCounter);
+  const [navbarState, navbarSetState] = useState(false);
+  const navbarStateUpdate = () => {
+    navbarSetState(!navbarState);
+  };
+
   return (
-    <section className="HeaderWrap">
-      <header className="Header">
-        <a href="#">
+    <div className="Header">
+      <div className="navbarContainer">
+        <a>
           <img
             src="https://caselab-group-1.herokuapp.com/images/logo.png"
             className="logo"
             alt="logo"
           />
         </a>
-        <nav>
-          <ul className="menu">
-            <li>
-              <a onClick={() => dispatch(setMenuAction("main"))}>Главная</a>
-            </li>
-            <li>
-              <a onClick={() => dispatch(setMenuAction("menu"))}>Меню</a>
-            </li>
-            <li>
-              <a onClick={() => dispatch(setMenuAction("contacts"))}>
-                Контакты
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <ul className="headerContacts">
-          <li>Наш телефон:</li>
-          <li>+996 705 188 955</li>
-          <li>+996 555 188 955</li>
-          <li>работаем с 10:00 до 00:00</li>
-        </ul>
-        <ul className="headerCart">
-          <li>
-            <a onClick={() => dispatch(setMenuAction("cart"))}>
+        <div
+          className={"navbarToggle" + (!navbarState ? "" : " is-active")}
+          onClick={navbarStateUpdate}
+          id="mobileMenu"
+        >
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </div>
+        <ul className={!navbarState ? "navbarMenu" : "navbarMenu active"}>
+          <li className="navbarItem">
+            <a
+              onClick={() => dispatch(setMenuAction("main"))}
+              className="navbarLinks"
+            >
+              Главная
+            </a>
+          </li>
+          <li className="navbarItem">
+            <a
+              onClick={() => dispatch(setMenuAction("menu"))}
+              className="navbarLinks"
+            >
+              Меню
+            </a>
+          </li>
+          <li className="navbarItem">
+            <a
+              onClick={() => dispatch(setMenuAction("contacts"))}
+              className="navbarLinks"
+            >
+              Контакты
+            </a>
+          </li>
+          {/* <li className="navbarItem">
+            <ul className="headerContacts">
+              <li>Наш телефон:</li>
+              <li>+996 705 188 955</li>
+              <li>+996 555 188 955</li>
+              <li>работаем с 10:00 до 00:00</li>
+            </ul>
+          </li> */}
+          <li className="navbarItem">
+            <a
+              onClick={() => dispatch(setMenuAction("cart"))}
+              className="navbarLinks"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="30px"
@@ -55,8 +83,8 @@ function Header() {
             <span className="cartCounter">{cartCounter}</span>
           </li>
         </ul>
-      </header>
-    </section>
+      </div>
+    </div>
   );
 }
 
