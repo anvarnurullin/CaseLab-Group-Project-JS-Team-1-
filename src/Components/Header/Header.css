@@ -36,6 +36,7 @@ body {
 
 .menu li {
   margin-left: 90px;
+  cursor: pointer;
 }
 
 .logo {
@@ -66,4 +67,5 @@ body {
 
 .headerCart {
   list-style: none;
+  cursor: pointer;
 }
