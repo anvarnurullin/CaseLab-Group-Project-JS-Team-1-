@@ -5,9 +5,9 @@ import Header from "./Components/Header/Header";
 import Main from "./Components/Main/Main";
 import Menu from "./Components/Menu/Menu";
 import Cart from "./Components/Cart/Cart";
+import Modal from "./Components/Modal/Modal";
 import { useSelector } from "react-redux";
 import { RootState } from "./store/store";
-import Modal from './Components/Modal/Modal';
 
 function App() {
   let pageContent;
@@ -36,7 +36,7 @@ function App() {
       <Header></Header>
       {pageContent}
       <Footer></Footer>
-      {(modal) ? <Modal {...modalValue} /> : <></>}
+      {modal ? <Modal {...modalValue} /> : <></>}
     </div>
   );
 }
