@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
 import { QueryResult } from "pg";
-var connection = require('../../build/dataBase/connection.js');
+var connection = require('../dataBase/connection.js');
+var appRoot = require('../index')
 connection.connect();
 if(connection){
     console.log('database connection')
@@ -8,7 +9,7 @@ if(connection){
 const router = Router();
 
 router.get('/', (req: Request, response: Response) => {
-  response.send('Hi HI');
+  response.sendFile(appRoot + '/pages/index.html');
 });
 
 
@@ -29,7 +30,7 @@ router.get('/getProducts', (req: Request, response: Response) => {
         type: item.type,
         promo: item.promo,
         imagePath: item.imagePath,
-        ingrediants: (filterArray.length) ? filterArray.map(function(ingred){
+        ingredients: (filterArray.length) ? filterArray.map(function(ingred){
           return {
             idIngredient: ingred.idIngredient,
             ingredTitle: ingred.ingredTitle,
@@ -79,7 +80,7 @@ router.get('/getPromo', (req: Request, response: Response) => {
         type: item.type,
         promo: item.promo,
         imagePath: item.imagePath,
-        ingrediants: (filterArray.length) ? filterArray.map(function(ingred){
+        ingredients: (filterArray.length) ? filterArray.map(function(ingred){
           return {
             idIngredient: ingred.idIngredient,
             ingredTitle: ingred.ingredTitle,
