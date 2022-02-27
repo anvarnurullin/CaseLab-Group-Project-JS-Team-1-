@@ -20,7 +20,9 @@ function OrderList() {
   } else {
     //@ts-expect-error
     setOrderList = orderListValue.map(function (item) {
-      sumOrderList += Number(item.orderItem.price);
+      sumOrderList +=
+        Number(item.orderItem.price) * item.orderItem.productQuantity;
+      console.log(sumOrderList);
       return <OrderItem {...item} />;
     });
   }
