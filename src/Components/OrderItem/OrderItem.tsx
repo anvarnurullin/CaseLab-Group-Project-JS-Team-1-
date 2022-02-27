@@ -1,35 +1,40 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import {OrderList} from '../../typescript/main'
+import { useDispatch, useSelector } from "react-redux";
+import { OrderList } from "../../typescript/main";
 import { removeOrderItemAction } from "../../store/orderListReducer";
 import "./OrderItem.css";
 import { decreaseCounterAction } from "../../store/cartCounterReducer";
+import {
+  increaseOrderItemAction,
+  decreaseOrderItemAction,
+} from "../../store/orderListReducer";
 
-const arr = [];
-
-function OrderItem({idOrderItem, orderItem}:{idOrderItem:number, orderItem:OrderList}) {
-
+function OrderItem({
+  idOrderItem,
+  orderItem,
+}: {
+  idOrderItem: number;
+  orderItem: OrderList;
+}) {
   const dispatch = useDispatch();
+  const counter = +orderItem.productQuantity;
 
-  const [count1, setCount1] = React.useState(1);
-  const price1 = +orderItem.price;
+  const price = +orderItem.price;
 
-  const summ1 = price1 * count1;
+  const sum = price * counter;
 
-  const plus1 = () => {
-    setCount1(count1 + 1);
-  };
+  function increaseOrderItem() {
+    dispatch(increaseOrderItemAction(idOrderItem));
+  }
 
-  const minus1 = () => {
-    if (count1 > 1) {
-      setCount1(count1 - 1);
-    }
-  };
-  function deleteFromCart(){
+  function decreaseOrderItem() {
+    dispatch(decreaseOrderItemAction(idOrderItem));
+  }
+
+  function deleteFromCart() {
     dispatch(removeOrderItemAction(idOrderItem));
     dispatch(decreaseCounterAction());
   }
-
 
   return (
     <div className="OrderItem">
@@ -39,16 +44,18 @@ function OrderItem({idOrderItem, orderItem}:{idOrderItem:number, orderItem:Order
         </div>
         <div className="Counter">
           <div>
-            <button id="Minus" onClick={minus1}>
+            <button id="Minus" onClick={decreaseOrderItem}>
               -
             </button>
-            <div id="Count">{count1}</div>
-            <button id="Plus" onClick={plus1}>
+            <div id="Count">{counter}</div>
+            <button id="Plus" onClick={increaseOrderItem}>
               +
             </button>
           </div>
-          <div id="Summ">{summ1}</div>
-          <div id="Delete" onClick={deleteFromCart}>X</div>
+          <div id="Summ">{sum}</div>
+          <div id="Delete" onClick={deleteFromCart}>
+            X
+          </div>
         </div>
       </div>
     </div>

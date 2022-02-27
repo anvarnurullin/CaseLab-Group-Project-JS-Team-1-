@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Main.css";
 import PromoSection from "./PromoSection/PromoSection";
 import { useDispatch } from "react-redux";
@@ -6,68 +6,17 @@ import { setMenuAction } from "../../store/menuReducer";
 
 function Main() {
   const dispatch = useDispatch();
-  const productArray = [
-    {
-      idProduct: 1,
-      title: "Шаурма 4 сыра",
-      weight: "390",
-      price: "299",
-      type: "шаурма",
-      promo: true,
-      imagePath:
-        "https://s3-alpha-sig.figma.com/img/0262/9d17/642d15db4e22823375bb3f5cc6c1f6d3?Expires=1646611200&Signature=a8t6k1WrzYQzu-E93ety-UDzdxvmpEjn3uRdM71VvpDbsarHSuDaPu2axtp-42nMO43PW9Ev7ULpDTYtBpt50Z3AH3qslo1a4tybBpBYrR649TjIhaW4gDyDN7qQhfprnNumQwDTtEfqOAKteWlV40KhZuDLIVEyjSYEwev~wWvyrAKBqDMaNoRqjCGBw55wg-CVXQ6KcPgu6~rHPCGwMAEuXpZ0PVpMUHdvryZkXfvSL1UwV-mnOVu8QwkwTU0aKgvKyMi6ZcwZIFXEu2VanmOKU4X7wh8i~NFVn0wdvevEAju1izFkEapXdTRh8guf~jgHIHEg42sGeoiArlZR0g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
-      ingredients: [
-        {
-          idIngredient: 1,
-          ingredTitle: "Сыр  Моцарелла",
-          ingredQuantity: 2,
-          ingredPrice: "30",
-        },
-        {
-          idIngredient: 2,
-          ingredTitle: "Сыр Сулугуни",
-          ingredQuantity: 1,
-          ingredPrice: "10",
-        },
-        {
-          idIngredient: 3,
-          ingredTitle: "Кунжутный соус",
-          ingredQuantity: 1,
-          ingredPrice: "100",
-        },
-      ],
-    },
-    {
-      idProduct: 2,
-      title: "Шаурма",
-      weight: "350",
-      price: "250",
-      type: "шаурма",
-      promo: true,
-      imagePath:
-        "https://s3-alpha-sig.figma.com/img/0262/9d17/642d15db4e22823375bb3f5cc6c1f6d3?Expires=1646611200&Signature=a8t6k1WrzYQzu-E93ety-UDzdxvmpEjn3uRdM71VvpDbsarHSuDaPu2axtp-42nMO43PW9Ev7ULpDTYtBpt50Z3AH3qslo1a4tybBpBYrR649TjIhaW4gDyDN7qQhfprnNumQwDTtEfqOAKteWlV40KhZuDLIVEyjSYEwev~wWvyrAKBqDMaNoRqjCGBw55wg-CVXQ6KcPgu6~rHPCGwMAEuXpZ0PVpMUHdvryZkXfvSL1UwV-mnOVu8QwkwTU0aKgvKyMi6ZcwZIFXEu2VanmOKU4X7wh8i~NFVn0wdvevEAju1izFkEapXdTRh8guf~jgHIHEg42sGeoiArlZR0g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
-      ingredients: [
-        {
-          idIngredient: 1,
-          ingredTitle: "Сыр Моцарелла",
-          ingredQuantity: 2,
-          ingredPrice: "30",
-        },
-        {
-          idIngredient: 2,
-          ingredTitle: "Сыр Сулугуни",
-          ingredQuantity: 1,
-          ingredPrice: "10",
-        },
-        {
-          idIngredient: 3,
-          ingredTitle: "Кунжутный соус",
-          ingredQuantity: 1,
-          ingredPrice: "100",
-        },
-      ],
-    },
-  ];
+  const [productArray, setProductArray] = useState<any>(null);
+  useEffect(() => {
+    async function getPromo() {
+      let response = await fetch(
+        "https://caselab-group-1.herokuapp.com/getPromo"
+      );
+      response = await response.json();
+      setProductArray(response);
+    }
+    getPromo();
+  }, []);
   return (
     <div className="Main">
       <div className="welcomeSection">
@@ -85,10 +34,12 @@ function Main() {
           />
         </div>
       </div>
-      <PromoSection
-        title="Акция дня (успей полакомиться)"
-        products={productArray}
-      ></PromoSection>
+      {productArray && (
+        <PromoSection
+          title="Акция дня (успей полакомиться)"
+          products={productArray}
+        ></PromoSection>
+      )}
       <div className="menuButton">
         <a onClick={() => dispatch(setMenuAction("menu"))}>Меню</a>
       </div>
