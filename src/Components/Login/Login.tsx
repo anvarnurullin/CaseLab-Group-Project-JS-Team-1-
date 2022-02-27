@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 
 function Login(){
@@ -10,6 +10,15 @@ function Login(){
     const [passwordDirty, passwordInputDirty] = useState(false);
     const [loginError, loginInputError] = useState("Логин не может быть пустым");
     const [passwordError, passwordInputError] = useState("Пароль не может быть пустым");
+    const [formValid, setFormValid] = useState(false);
+
+    useEffect(() => {
+        if(loginError || passwordError){
+            setFormValid(false)
+        }else{
+            setFormValid(true)
+        }
+    }, [loginError, passwordError])
 
     function handleChange_login(){
         loginInput(login);
@@ -45,7 +54,7 @@ function Login(){
                 <input onBlur={e => loginHandler(e)} name="login" type="text" placeholder="логин" id="login" value={login} onChange={handleChange_login} /><br/>
                 {(passwordError && passwordDirty) && <div style={{color: 'red'}}>{passwordError}</div>}
                 <input onBlur={e => loginHandler(e)} name="password" type="password" placeholder="пароль" id="password" value={password} onChange={handleChange_password}/><br/>
-                <button type="submit">Вход</button>
+                <button disabled={!formValid} type="submit">Вход</button>
             </form>
         </div>
     );
