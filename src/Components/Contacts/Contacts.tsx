@@ -1,22 +1,36 @@
-import React from 'react';
-import Branches from './Branches';
+import React, { useState, useEffect } from 'react';
 import Map from './Map';
 import './Contacts.css';
 
 function Contacts() {
+  const [branchesArray, setBranchesArray] = useState<any>(null);
+
+  useEffect(() => {
+    async function getBranch() {
+      let response = await fetch(
+        'https://caselab-group-1.herokuapp.com/getFilials'
+      );
+      response = await response.json();
+      setBranchesArray(response);
+    }
+    getBranch();
+  }, []);
 
   let branchesList = () => {
     return (
       <div>
-        {Branches.slice(1).map(i => (
-          <div>
-            <p>{i.filialTitle}</p>
-            <ul>
-              <li>Тел: {i.phone}</li>
-              <li>Адрес: {i.adress}</li>
-            </ul>
-          </div>
-        )
+        {branchesArray ? ( //@ts-expect-error
+          branchesArray.slice(1).map((i) => (
+            <div>
+              <p>{i.filialTitle}</p>
+              <ul>
+                <li>Тел: {i.phone}</li>
+                <li>Адрес: {i.adress}</li>
+              </ul>
+            </div>
+          ))
+        ) : (
+          <></>
         )}
       </div>
     );
@@ -30,7 +44,7 @@ function Contacts() {
             Уважаемые гости, вы можете оформить заказ и забрать его по адресу
             ниже:
           </p>
-          <p>Шаурма № 1 на Комсомольской:</p>
+          <p>Шаурма No 1 на Комсомольской:</p>
           <ul>
             <li>Тел.: + 996 705 188 955</li>
             <li>Адрес: Комсомольский проспект, 28</li>
@@ -44,7 +58,10 @@ function Contacts() {
           <div>{branchesList()}</div>
         </div>
         <div className="ContactsMail">
-          <p>Ваши пожелания и предложения пишите сюда: {Branches[0].email}</p>
+          <p>
+            Ваши пожелания и предложения пишите сюда:{' '}
+            {branchesArray ? branchesArray[0].email : <></>}
+          </p>
         </div>
         <div className="ContactsMap">
           <Map />

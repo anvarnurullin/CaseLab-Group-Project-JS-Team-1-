@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import Branches from './Branches';
+import React, { useState, useEffect } from 'react';
 import {
   GoogleMap,
   InfoWindow,
@@ -19,6 +18,17 @@ const containerStyle = {
 
 function Map() {
   const [activeMarker, setActiveMarker] = useState(null);
+  const [branchesArray, setBranchesArray] = useState<any>(null);
+  useEffect(() => {
+    async function getBranch() {
+      let response = await fetch(
+        'https://caselab-group-1.herokuapp.com/getFilials'
+      );
+      response = await response.json();
+      setBranchesArray(response);
+    }
+    getBranch();
+  }, []);
 
   const handleActiveMarker = (marker: any) => {
     if (marker === activeMarker) {
@@ -39,25 +49,32 @@ function Map() {
       zoom={12}
       mapContainerStyle={containerStyle}
     >
-      {Branches.map(({ idFilial, filialTitle, adress, lat, lon, phone }) => (
-        <Marker
-          key={idFilial}
-          position={{ lat: Number(lat), lng: Number(lon) }}
-          onClick={() => handleActiveMarker(idFilial)}
-        >
-          {activeMarker === idFilial ? (
-            <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-              <div>
-                <p>
-                  <b>{filialTitle}</b>
-                </p>
-                <p>{adress}</p>
-                <p>{phone}</p>
-              </div>
-            </InfoWindow>
-          ) : null}
-        </Marker>
-      ))}
+      {branchesArray ? (
+        branchesArray.map(
+          //@ts-expect-error
+          ({ idFilial, filialTitle, adress, lat, lon, phone }) => (
+            <Marker
+              key={idFilial}
+              position={{ lat: Number(lat), lng: Number(lon) }}
+              onClick={() => handleActiveMarker(idFilial)}
+            >
+              {activeMarker === idFilial ? (
+                <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                  <div>
+                    <p>
+                      <b>{filialTitle}</b>
+                    </p>
+                    <p>{adress}</p>
+                    <p>{phone}</p>
+                  </div>
+                </InfoWindow>
+              ) : null}
+            </Marker>
+          )
+        )
+      ) : (
+        <></>
+      )}
     </GoogleMap>
   ) : (
     <div>Map cannot be loaded right now, sorry.</div>
