@@ -30,7 +30,7 @@ function App() {
       pageContent = <Cart></Cart>;
       break;
     case "login":
-      pageContent = <Login></Login>
+      pageContent = <Login></Login>;
       break;
     default:
       pageContent = <Main></Main>;
@@ -40,6 +40,7 @@ function App() {
       <Header></Header>
       {pageContent}
       <Footer></Footer>
+      {modal ? <Modal {...modalValue} /> : <></>}
     </div>
   );
 }

@@ -27,6 +27,7 @@ export interface OrderList {
   ingrediantList: ingrediantList[] | null;
 }
 export interface ingrediantList {
+  ingredTitle: string;
   idIngredient: number;
   newIngredQuantity: number;
 }
