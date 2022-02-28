@@ -12,27 +12,34 @@ export const orderListReducer = (
       if (state.length === 0) {
         return [action.payload];
       } else {
-        //@ts-expect-error
-        let checkOrderItemID = state.filter(val => val.orderItem.idProduct === action.payload.orderItem.idProduct);
+        let checkOrderItemID = state.filter(
+          (val) =>
+            //@ts-expect-error
+            val.orderItem.idProduct === action.payload.orderItem.idProduct
+        );
         if (checkOrderItemID.length === 0) {
           return [...state, action.payload];
         } else {
-        return state.map((item) => {
-          //@ts-expect-error
-          if(item.orderItem.idProduct === action.payload.orderItem.idProduct && action.payload.orderItem.ingrediantList == undefined) {
-            return {
-              idOrderItem: item.idOrderItem,
-              orderItem: {
-                ...item.orderItem,
-                productQuantity: item.orderItem.productQuantity + 1,
-              },
+          return state.map((item) => {
+            if (
+              //@ts-expect-error
+              item.orderItem.idProduct === action.payload.orderItem.idProduct &&
+              //@ts-expect-error
+              action.payload.orderItem.ingrediantList == undefined
+            ) {
+              return {
+                idOrderItem: item.idOrderItem,
+                orderItem: {
+                  ...item.orderItem,
+                  productQuantity: item.orderItem.productQuantity + 1,
+                },
+              };
+            } else {
+              return item;
             }
-          }
-        })
+          });
+        }
       }
-    }
-    case "removeOrderItem":
-      return state.filter((item) => item.idOrderItem !== action.payload);
     case "increaseOrderItem":
       return state.map((item) => {
         if (item.idOrderItem === action.payload) {
@@ -43,6 +50,8 @@ export const orderListReducer = (
               productQuantity: item.orderItem.productQuantity + 1,
             },
           };
+        } else {
+          return item;
         }
       });
     case "decreaseOrderItem":
@@ -52,11 +61,15 @@ export const orderListReducer = (
             idOrderItem: item.idOrderItem,
             orderItem: {
               ...item.orderItem,
-              productQuantity: item.orderItem.productQuantity - 1,
+              productQuantity: (item.orderItem.productQuantity === 1) ? 1 : item.orderItem.productQuantity - 1,
             },
           };
+        } else {
+          return item;
         }
       });
+    case "removeOrderItem":
+      return state.filter((item) => item.idOrderItem !== action.payload);
     default:
       return state;
   }
@@ -74,10 +87,12 @@ export const removeOrderItemAction = (payload: number) => ({
   type: "removeOrderItem",
   payload,
 });
+
 export const increaseOrderItemAction = (payload: number) => ({
   type: "increaseOrderItem",
   payload,
 });
+
 export const decreaseOrderItemAction = (payload: number) => ({
   type: "decreaseOrderItem",
   payload,

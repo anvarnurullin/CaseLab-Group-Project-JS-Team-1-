@@ -5,13 +5,12 @@ import OrderItem from "../OrderItem/OrderItem";
 import "./OrderList.css";
 
 function OrderList() {
-  const orderListState = useSelector((state: RootState) => state.cartCounter);
   const orderListValue = useSelector((state: RootState) => state.orderList);
-  console.log(orderListState);
   console.log(orderListValue);
   let setOrderList;
   let sumOrderList: number = 0;
-  if (orderListState === 0) {
+  //@ts-expect-error
+  if (orderListValue.length === 0) {
     setOrderList = (
       <div className="emptyCart">
         Ваша корзина пуста. Добавьте в нее что-нибудь!

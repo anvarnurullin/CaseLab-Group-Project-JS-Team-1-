@@ -1,9 +1,8 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { OrderList } from "../../typescript/main";
 import { removeOrderItemAction } from "../../store/orderListReducer";
 import "./OrderItem.css";
-import { decreaseCounterAction } from "../../store/cartCounterReducer";
 import {
   increaseOrderItemAction,
   decreaseOrderItemAction,
@@ -33,7 +32,6 @@ function OrderItem({
 
   function deleteFromCart() {
     dispatch(removeOrderItemAction(idOrderItem));
-    dispatch(decreaseCounterAction());
   }
 
   return (

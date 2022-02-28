@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import IngredientList from './IngredientList/IngredientList';
 import {setPriceAction} from '../../store/cardPriceReducer';
 import { RootState } from '../../store/store';
-import {increaseCounterAction} from '../../store/cartCounterReducer';
 import { hideModalAction } from '../../store/showModalReducer';
 import {addOrderItemAction} from '../../store/orderListReducer';
 import './Modal.css';
@@ -15,7 +14,7 @@ function Modal({product}:{product:Product}) {
     dispatch(setPriceAction(+product.price));
   }, [])
   const dispatch = useDispatch();
-  const id = useSelector((state:RootState) => state.cartCounter);
+  const id = useSelector((state: RootState) => state.orderList);
   const price = useSelector((state: RootState) => state.cardPrice);
   const [newIngredQuantity, changeIngredQuantity] = useState([])
 
@@ -51,10 +50,10 @@ function Modal({product}:{product:Product}) {
     return <IngredientList key={index} ingredient={ingredient} changeIngred={changeIngred}/>
   })
   function handleAddCardBtn(){
-    dispatch(increaseCounterAction());
     dispatch(addOrderItemAction(
       {
-        idOrderItem: id + 1,
+        //@ts-expect-error
+        idOrderItem: (id.length > 0) ? id.length : 0,
         orderItem: {
           idProduct: product.idProduct,
           title: product.title,
