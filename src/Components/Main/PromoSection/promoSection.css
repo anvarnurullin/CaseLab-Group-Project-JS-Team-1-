@@ -1,3 +1,7 @@
+.promoSection {
+  width: 100%; /* Добавила ширину - Диля*/
+}
+
 .promoSectionProducts {
   display: flex;
   justify-content: space-evenly;
@@ -11,4 +15,20 @@
   line-height: 42px;
   padding: 15px;
   text-align: center;
+}
+
+@media screen and (max-width: 414px) {
+  .promoSection {
+    width: 100%; /* Добавила ширину - Диля*/
+  }
+
+  .promoSection h2 {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 20px;
+    padding: 15px;
+    text-align: center;
+  }
 }

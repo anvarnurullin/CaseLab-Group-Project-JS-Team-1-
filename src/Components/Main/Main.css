@@ -39,7 +39,6 @@
   border-radius: 2px;
   background-size: 200%;
   transition: 0.5s;
-  cursor: pointer;
 }
 
 .menuButton a:hover {
@@ -89,7 +88,7 @@
   }
 }
 
-@media screen and (max-width: 412px) {
+@media screen and (max-width: 414px) {
   .welcomeSection {
     width: 100%;
     flex-direction: column-reverse;
