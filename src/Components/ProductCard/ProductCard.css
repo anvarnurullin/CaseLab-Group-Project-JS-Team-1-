@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 450px;
+  height: 100%; /* Изменила фиксированную высоту (450px) - Диля*/
   width: calc((100% - 40px * 4) / 5.5);
   min-width: 200px;
   padding: 20px 18px 5px 18px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: normal;
   font-size: 22px;
@@ -15,7 +15,7 @@
   box-shadow: 0 0 10px gray;
   margin-bottom: 40px;
 }
-.promoProductCard{
+.promoProductCard {
   width: calc((100% - 70px * 2) / 3);
 }
 .productCardImage {
@@ -29,28 +29,28 @@
 }
 .productCardInfo span:first-of-type {
   margin-right: 30px;
-  color: #A4ACAD;
+  color: #a4acad;
 }
 hr {
-  border: 0.5px solid #A4ACAD;
+  border: 0.5px solid #a4acad;
 }
 .addToCardBtnBar {
   display: flex;
   justify-content: space-between;
 }
 .addToCardBtn {
-  background: #F46D40;
+  background: #f46d40;
   border-radius: 5px;
   padding: 5px 10px;
   border: none;
   width: 50%;
   max-width: 150px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
   line-height: 18px;
-  color: #FFFFFF;
+  color: #ffffff;
   position: relative;
   left: 50%;
   transition: 0.5s;
@@ -67,12 +67,13 @@ hr {
   position: absolute;
   top: -3px;
   right: 0;
-  content: '';
+  content: "";
   width: 200%;
   padding: 0.5px;
-  background: #A4ACAD;
+  background: #a4acad;
 }
-.productCardTitle, .productCardInfo {
+.productCardTitle,
+.productCardInfo {
   margin: 0;
 }
 .promoPrice {
@@ -82,4 +83,16 @@ hr {
 }
 .promoPrice span:first-child {
   text-decoration: line-through;
+}
+
+@media screen and (max-width: 414px) {
+  .ProductCard {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .addToCardBtn {
+    font-size: 12px;
+    line-height: 18px;
+  }
 }

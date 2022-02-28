@@ -36,24 +36,25 @@ function OrderItem({
 
   return (
     <div className="OrderItem">
-      <div className="OrderItemDocher">
-        <div className="Description Shaurma">
-          <h3>{orderItem.title}</h3>
+      <div className="productDescription">
+        <p className="productName">{orderItem.title}</p>
+      </div>
+      <div className="actionMenu">
+        <div className="addDeleteButton">
+          <a onClick={decreaseOrderItem}> - </a>
         </div>
-        <div className="Counter">
-          <div>
-            <button id="Minus" onClick={decreaseOrderItem}>
-              -
-            </button>
-            <div id="Count">{counter}</div>
-            <button id="Plus" onClick={increaseOrderItem}>
-              +
-            </button>
-          </div>
-          <div id="Summ">{sum}</div>
-          <div id="Delete" onClick={deleteFromCart}>
-            X
-          </div>
+        <div className="productQuantity">{counter}</div>
+        <div className="addDeleteButton">
+          <a onClick={increaseOrderItem}> + </a>
+        </div>
+        <div className="totalPrice">{sum} руб</div>
+        <div className="deleteButton">
+          <img
+            src={require("./deleteImage.png")}
+            alt="удалить товар"
+            className="deleteButton"
+            onClick={deleteFromCart}
+          />
         </div>
       </div>
     </div>

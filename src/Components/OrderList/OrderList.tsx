@@ -30,7 +30,7 @@ function OrderList() {
       {setOrderList}
       <div className="summary">
         <div className="summaryText">Итого:</div>
-        <div className="summaryOrder">{sumOrderList}</div>
+        <div className="summaryOrder">{sumOrderList} руб</div>
       </div>
     </div>
   );
