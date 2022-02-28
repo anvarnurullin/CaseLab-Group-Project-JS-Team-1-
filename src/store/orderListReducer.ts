@@ -61,7 +61,7 @@ export const orderListReducer = (
             idOrderItem: item.idOrderItem,
             orderItem: {
               ...item.orderItem,
-              productQuantity: item.orderItem.productQuantity - 1,
+              productQuantity: (item.orderItem.productQuantity === 1) ? 1 : item.orderItem.productQuantity - 1,
             },
           };
         } else {

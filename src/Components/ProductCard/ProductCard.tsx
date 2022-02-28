@@ -3,7 +3,6 @@ import { Product } from "../../typescript/main";
 import { useDispatch, useSelector } from "react-redux";
 import { setModalAction } from "../../store/modalReducer";
 import { showModalAction } from "../../store/showModalReducer";
-import { increaseCounterAction } from "../../store/cartCounterReducer";
 import { addOrderItemAction } from "../../store/orderListReducer";
 import "./ProductCard.css";
 import { RootState } from "../../store/store";
@@ -55,7 +54,6 @@ function ProductCard({
       dispatch(setModalAction({ product: product }));
       dispatch(showModalAction());
     } else {
-      dispatch(increaseCounterAction());
       dispatch(
         addOrderItemAction({
           //@ts-expect-error

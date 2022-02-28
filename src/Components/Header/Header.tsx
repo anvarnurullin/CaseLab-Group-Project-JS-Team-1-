@@ -3,14 +3,20 @@ import "./Header.css";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { setMenuAction } from "../../store/menuReducer";
+import { OrderList } from "../../typescript/main";
 
 function Header() {
   const dispatch = useDispatch();
-  const cartCounter = useSelector((state: RootState) => state.cartCounter);
   const [navbarState, navbarSetState] = useState(false);
   const navbarStateUpdate = () => {
     navbarSetState(!navbarState);
   };
+
+    const counter: { idOrderItem: number; orderItem: OrderList }[] | [] = useSelector((state: RootState) => state.orderList);
+    //@ts-expect-error
+    let cartCounter = (counter.length === 0) ? 0 : counter.reduce((currentValue, item) => {
+      return currentValue + item.orderItem.productQuantity;
+    }, 0)
 
   return (
     <div className="Header">

@@ -1,16 +1,18 @@
 import { Router, Request, Response } from "express";
 import { QueryResult } from "pg";
 var connection = require('../dataBase/connection.js');
-var appRoot = require('../index')
+const path = require('path');
+
 connection.connect();
 if(connection){
     console.log('database connection')
 }
+
 const router = Router();
 
-router.get('/', (req: Request, response: Response) => {
-  response.sendFile(appRoot + '/pages/index.html');
-});
+/* router.get('/', (req: Request, response: Response) => {
+  response.sendFile(path.join(__dirname, '../static/pages/index.html'));
+}); */
 
 
 router.get('/getProducts', (req: Request, response: Response) => {
@@ -103,4 +105,10 @@ router.get('/getPromo', (req: Request, response: Response) => {
 
 });
 
-export { router };
+router.post('/newOrder', (req: Request, response: Response) => {
+  console.log(req.body);
+  //addNewOrderForDB(req.body.name, req.body.telephone);
+});
+
+
+export {router}

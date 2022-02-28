@@ -102,27 +102,29 @@ ALTER TABLE IF EXISTS shawarma."Ingredients"
   }
 });
 
-//Create table "ProductsOrderList"
+//Create table "OrderItem"
 connection.query(`
-    CREATE TABLE shawarma."ProductsOrderList"
+    CREATE TABLE shawarma."OrderItem"
 (
-  "productQuantity" integer NOT NULL,
-  "Products_idProduct" serial NOT NULL,
-  "Orders_idOrder" serial NOT NULL,
-  CONSTRAINT "Products_idProduct" FOREIGN KEY ("Products_idProduct")
-      REFERENCES shawarma."Products" ("idProduct") MATCH SIMPLE
-      ON UPDATE NO ACTION
-      ON DELETE NO ACTION
-      NOT VALID,
-  CONSTRAINT "Orders_idOrder" FOREIGN KEY ("Orders_idOrder")
-      REFERENCES shawarma."Orders" ("idOrder") MATCH SIMPLE
-      ON UPDATE NO ACTION
-      ON DELETE NO ACTION
-      NOT VALID
+    "idOrderItem" serial NOT NULL,
+    "productQuantity" integer NOT NULL,
+    "Products_idProduct" serial NOT NULL,
+    "Orders_idOrder" serial NOT NULL,
+    PRIMARY KEY ("idOrderItem"),
+    CONSTRAINT "Products_idProduct" FOREIGN KEY ("Products_idProduct")
+        REFERENCES shawarma."Products" ("idProduct") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT "Orders_idOrder" FOREIGN KEY ("Orders_idOrder")
+        REFERENCES shawarma."Orders" ("idOrder") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
 );
 
-ALTER TABLE IF EXISTS shawarma."ProductsOrderList"
-  OWNER to dnkwwjkgcebqou;
+ALTER TABLE IF EXISTS shawarma."OrderItem"
+    OWNER to dnkwwjkgcebqou;
   `, (err: Error, res: QueryResult) => {
       if (err) throw err;
       if(res) {
@@ -136,14 +138,14 @@ connection.query(`
 (
     "newIngredQuantity" integer NOT NULL,
     "Ingredients_idIngredient" serial NOT NULL,
-    "Orders_idOrder" serial NOT NULL,
+    "OrderItem_idOrderItem" serial NOT NULL,
     CONSTRAINT "Ingredients_idIngredient" FOREIGN KEY ("Ingredients_idIngredient")
         REFERENCES shawarma."Ingredients" ("idIngredient") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
-    CONSTRAINT "Orders_idOrder" FOREIGN KEY ("Orders_idOrder")
-        REFERENCES shawarma."Orders" ("idOrder") MATCH SIMPLE
+    CONSTRAINT "OrderItem_idOrderItem" FOREIGN KEY ("OrderItem_idOrderItem")
+        REFERENCES shawarma."OrderItem" ("idOrderItem") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID
