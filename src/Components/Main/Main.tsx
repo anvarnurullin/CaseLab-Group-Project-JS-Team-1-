@@ -9,11 +9,13 @@ function Main() {
   const [productArray, setProductArray] = useState<any>(null);
   useEffect(() => {
     async function getPromo() {
-      let response = await fetch('https://caselab-group-1.herokuapp.com/getPromo');
+      let response = await fetch(
+        "https://caselab-group-1.herokuapp.com/getPromo"
+      );
       response = await response.json();
       setProductArray(response);
     }
-    getPromo()
+    getPromo();
   }, []);
   return (
     <div className="Main">
@@ -32,10 +34,12 @@ function Main() {
           />
         </div>
       </div>
-      {productArray && <PromoSection
-        title="Акция дня (успей полакомиться)"
-        products={productArray}
-      ></PromoSection>}
+      {productArray && (
+        <PromoSection
+          title="Акция дня (успей полакомиться)"
+          products={productArray}
+        ></PromoSection>
+      )}
       <div className="menuButton">
         <a onClick={() => dispatch(setMenuAction("menu"))}>Меню</a>
       </div>
