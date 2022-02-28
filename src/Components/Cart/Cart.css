@@ -94,7 +94,7 @@ fieldset.field-area1{
 
 }
 
-@media screen and (max-width: 412px){
+@media screen and (max-width: 414px){
   form{
     height:280px;
     padding:10px 500px 1px 120px;
