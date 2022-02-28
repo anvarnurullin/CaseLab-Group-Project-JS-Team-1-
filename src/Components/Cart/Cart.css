@@ -47,7 +47,7 @@ margin-left:-1px;
 form{
  width:200px;
  height:650px;
- padding:300px 300px 1px 150px;
+ padding:10px 300px 1px 150px;
 }
 
 fieldset.field-area1{
@@ -59,7 +59,7 @@ fieldset.field-area1{
 @media screen and (max-width: 1440px){
   form{
     height:650px;
-    padding:300px 1000px 1px 150px;
+    padding:10px 1000px 1px 150px;
    }
    
 }
@@ -67,7 +67,7 @@ fieldset.field-area1{
 @media screen and (max-width: 960px){
   form{
     height:280px;
-    padding:100px 500px 1px 150px;
+    padding:10px 500px 1px 150px;
    }
    input{
      width:180px;
@@ -97,7 +97,7 @@ fieldset.field-area1{
 @media screen and (max-width: 412px){
   form{
     height:280px;
-    padding:150px 500px 1px 120px;
+    padding:10px 500px 1px 120px;
    }
    input{
      width:120px;
