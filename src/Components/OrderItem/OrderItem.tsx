@@ -34,11 +34,18 @@ function OrderItem({
   function deleteFromCart() {
     dispatch(removeOrderItemAction(idOrderItem));
   }
-
+  const ingredientChanged = orderItem.ingrediantList?.map((item) => {
+    return (
+      <span>
+        {item.ingredTitle}:{item.newIngredQuantity}
+      </span>
+    );
+  });
   return (
     <div className="OrderItem">
       <div className="productDescription">
         <p className="productName">{orderItem.title}</p>
+        <p className="ingredientName">{ingredientChanged}</p>
       </div>
       <div className="actionMenu">
         <div className="addDeleteButton">
