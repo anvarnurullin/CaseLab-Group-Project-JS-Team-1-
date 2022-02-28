@@ -36,8 +36,8 @@ function OrderItem({
   }
   const ingredientChanged = orderItem.ingrediantList?.map((item) => {
     return (
-      <span>
-        {item.ingredTitle}:{item.newIngredQuantity}
+      <span className="ingredientTitleQty">
+        {item.ingredTitle}: {item.newIngredQuantity}
       </span>
     );
   });
