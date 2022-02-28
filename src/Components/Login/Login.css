@@ -1,28 +1,67 @@
-.AuthorizationForm{
-    background-color: #c4c4c4;
-    width: 370px;
-    height: 300px;
-    margin: 0 auto;
-}
 
-.AuthorizationForm h2, form{
-    text-align: center;
-}
+input {
+    border:none;
+    width: 284px;
+    height: 40px;
+    right: 1207px;
+    top: 1062px;
+    font-size: 18px;
+    background: #ffff;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .Login {
+   
+    padding: 30px;
+  }
+  
+  button.submitBtn {
+    
+    width: 277px;
+    height: 45px;
+    right: 433px;
+    border-radius: 5px;
+    background: #f46d40;
+    font-size: 14px;
+    margin: 10px 0px 10px 4px;
+  
+  }
+  h2 {
+    margin: 1em 1em 1em 2em;
+    
+  }
+  .cart_modal >.modalCard{
+    overflow:auto;
+    padding:100px;
+   
+  }
+  
+  fieldset.login{
+  
+  margin: 1em 1em 1em 1em;
+  margin-bottom:20px;
+  border:1px solid #000;
+  margin-left:-1px;
+  
+  }
 
-.AuthorizationForm h2{
-    padding-top: 30px;
-}
+  fieldset.password{
+  
+    margin: 1em 1em 1em 1em;
+    margin-bottom:20px;
+    border:1px solid #000;
+    margin-left:-1px;
+    
+    }
 
-.AuthorizationForm form input{
-    margin-top: 30px;
-}
 
-.AuthorizationForm form button{
-    margin-top: 30px;
-    width: 100px;
-    height: 50px;
-    background-color: black;
-    color: white;
-    font-size: 25px;
-}
-
+  form{
+  
+    padding:213px;
+    width: 300px;
+  }
+  
+  fieldset.fields{
+    border:none;
+  }

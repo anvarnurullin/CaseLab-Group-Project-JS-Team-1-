@@ -1,7 +1,10 @@
 import React from "react";
 import "./Footer.css";
+import { useDispatch } from "react-redux";
+import { setMenuAction } from "../../store/menuReducer";
 
 function Footer() {
+  const dispatch = useDispatch();
   return (
     <section className="Footer">
       <ul className="footerContacts">
@@ -9,7 +12,7 @@ function Footer() {
         <li>Тел.: +996 555 188 955</li>
         <li>Адрес: Комсомольский просп., 28</li>
         <li>
-          <a href="#">Авторизация для сотрудников</a>
+          <a onClick={() => dispatch(setMenuAction("login"))}>Авторизация для сотрудников</a>
         </li>
       </ul>
     </section>
