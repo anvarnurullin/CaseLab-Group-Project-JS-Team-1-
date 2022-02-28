@@ -83,26 +83,28 @@ fieldset.field-area1 {
   }
 }
 
-@media screen and (max-width: 414px) {
-  form {
-    height: 280px;
-    padding: 10px 500px 1px 120px;
-  }
-  input {
-    width: 120px;
-    height: 0px;
-    font-size: 14px;
-  }
-  fieldset {
-    margin: -1em 1em 2em 1em;
-  }
-  button.submitBtn {
-    font-size: 10px;
-    width: 100px;
-    height: 25px;
-    margin: -20px 0px 10px 25px;
-  }
-  h2 {
+
+@media screen and (max-width: 414px){
+  form{
+    height:280px;
+    padding:10px 500px 1px 120px;
+   }
+   input{
+     width:120px;
+     height:0px;
+     font-size:14px;
+   }
+   fieldset{
+     margin:-1em 1em 2em 1em;
+   }
+   button.submitBtn{
+     font-size:10px;
+     width: 100px;
+     height: 25px;
+     margin: -20px 0px 10px 25px;
+   }
+   h2 {
+
     margin: 1em 1em 2em 2.2em;
     font-size: 13px;
   }

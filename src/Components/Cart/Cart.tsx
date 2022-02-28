@@ -2,44 +2,58 @@ import "./Cart.css";
 import "../Modal/Modal.css";
 import { useDispatch } from "react-redux";
 import { setMenuAction } from "../../store/menuReducer";
-import { useEffect, useRef } from "react";
+import { store } from "../../store/store";
+import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import OrderList from "../OrderList/OrderList";
 
 
 function Cart() {
   const dispatch = useDispatch();
+  const [modalContent, setModalContent] = useState<ReactNode>();
 
-  const modal_backdrop = useRef<HTMLDivElement>(null);
+  const modal_backdrop = useCallback((div: HTMLDivElement) => {
+    if (div === null)
+      return;
+    div.onclick = event => {
+      if (event.target !== div)
+        return;
+      //@ts-expect-error
+      if (store.getState().orderList.length)
+        dispatch(setMenuAction("main"))
+      setModalContent(undefined);
+    };
+  }, []);
+
   const form = useRef<HTMLFormElement>(null);
-
   useEffect(() => {
-    if (modal_backdrop.current && form.current) {
-      modal_backdrop.current.onclick = event => {
-        if (event.target === modal_backdrop.current)
-          dispatch(setMenuAction("main"))
-      };
-      form.current.onsubmit = (event) => {
-        event.preventDefault();
-        modal_backdrop.current?.style.removeProperty("display");
-        console.log(Object.fromEntries(new FormData(form.current!))); 
-      };
-      form.current.querySelectorAll('input').forEach(input => Object.assign(input, {
-        oninvalid(this: HTMLInputElement, event) {
-          this.setCustomValidity('');
-          if (!this.validity.valid && this.dataset.validationError)
-            this.setCustomValidity(this.dataset.validationError);
-        },
-        oninput(this: HTMLInputElement, event) {
-          this.setCustomValidity('');
-        }
-      } as GlobalEventHandlers));
-    }
+    if (!form.current)
+      return;
+    form.current.onsubmit = (event) => {
+      event.preventDefault();
+      //@ts-expect-error
+      if (store.getState().orderList.length) {
+        setModalContent(<h2>Спасибо за заказ!</h2>);
+        console.log(Object.fromEntries(new FormData(form.current!)));
+      } else {
+        setModalContent(<p><h2>Корзина пуста. Заказ не оформлен.</h2></p>);
+      }
+    };
+    form.current.querySelectorAll('input').forEach(input => Object.assign(input, {
+      oninvalid(this: HTMLInputElement) {
+        this.setCustomValidity('');
+        if (!this.validity.valid && this.dataset.validationError)
+          this.setCustomValidity(this.dataset.validationError);
+      },
+      oninput(this: HTMLInputElement) {
+        this.setCustomValidity('');
+      }
+    }));
   }, []);
 
   return <>
     <div className="Cart">
       <div className="orderItem">
-      <OrderList/>
+        <OrderList/>
       </div>
       <form className="wrap" ref={form}>
         <fieldset className="field-area1">
@@ -58,12 +72,13 @@ function Cart() {
         </fieldset>
       </form>
     </div>
-    <div
-      className="Modal cart_modal"
-      style={{display: 'none'}}
-      ref={modal_backdrop}>
-      <div className="modalCard"><h2>Спасибо за заказ!</h2></div>
-    </div>
+    {modalContent &&
+      <div className="Modal cart_modal" ref={modal_backdrop}>
+        <div className="modalCard">
+          {modalContent}
+        </div>
+      </div>
+    }
   </>;
 }
 
