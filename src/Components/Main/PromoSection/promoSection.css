@@ -1,5 +1,6 @@
 .promoSection {
-  width: 100%; /* Добавила ширину - Диля*/
+  width: 50%; /* Добавила ширину - Диля*/
+  margin: 0 auto;
 }
 
 .promoSectionProducts {

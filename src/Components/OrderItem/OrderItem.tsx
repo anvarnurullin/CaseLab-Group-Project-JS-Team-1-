@@ -15,6 +15,7 @@ function OrderItem({
   idOrderItem: number;
   orderItem: OrderList;
 }) {
+  console.log(orderItem);
   const dispatch = useDispatch();
   const counter = +orderItem.productQuantity;
 
@@ -48,7 +49,7 @@ function OrderItem({
           <a onClick={increaseOrderItem}> + </a>
         </div>
         <div className="totalPrice">{sum} руб</div>
-        <div className="deleteButton">
+        <div className="deleteButton" onClick={deleteFromCart}>
           <img
             src={require("./deleteImage.png")}
             alt="удалить товар"
