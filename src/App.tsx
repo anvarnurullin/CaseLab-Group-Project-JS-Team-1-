@@ -6,6 +6,7 @@ import Main from "./Components/Main/Main";
 import Menu from "./Components/Menu/Menu";
 import Cart from "./Components/Cart/Cart";
 import Modal from "./Components/Modal/Modal";
+import Login from "./Components/Login/Login";
 import { useSelector } from "react-redux";
 import { RootState } from "./store/store";
 
@@ -28,6 +29,9 @@ function App() {
     case "cart":
       pageContent = <Cart></Cart>;
       break;
+    case "login":
+      pageContent = <Login></Login>
+      break;
     default:
       pageContent = <Main></Main>;
   }
@@ -36,7 +40,6 @@ function App() {
       <Header></Header>
       {pageContent}
       <Footer></Footer>
-      {modal ? <Modal {...modalValue} /> : <></>}
     </div>
   );
 }

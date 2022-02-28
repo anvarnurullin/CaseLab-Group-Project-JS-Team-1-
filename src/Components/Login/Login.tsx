@@ -1,63 +1,60 @@
-import React, { useEffect, useState } from "react";
 import "./Login.css";
+import "../Modal/Modal.css";
+import { useDispatch } from "react-redux";
+import { setMenuAction } from "../../store/menuReducer";
+import { useEffect, useRef } from "react";
 
-function Login(){
+function Login() {
+  const dispatch = useDispatch();
 
-    const [login, loginInput] = useState();
-    const [password, passwordInput] = useState();
+  const modal_auth = useRef<HTMLDivElement>(null);
+  const form = useRef<HTMLFormElement>(null);
 
-    const [loginDirty, loginInputDirty] = useState(false);
-    const [passwordDirty, passwordInputDirty] = useState(false);
-    const [loginError, loginInputError] = useState("Логин не может быть пустым");
-    const [passwordError, passwordInputError] = useState("Пароль не может быть пустым");
-    const [formValid, setFormValid] = useState(false);
-
-    useEffect(() => {
-        if(loginError || passwordError){
-            setFormValid(false)
-        }else{
-            setFormValid(true)
+  useEffect(() => {
+    if (modal_auth.current && form.current) {
+      modal_auth.current.onclick = event => {
+        if (event.target === modal_auth.current)
+          dispatch(setMenuAction("main"))
+      };
+      form.current.onsubmit = (event) => {
+        event.preventDefault();
+        modal_auth.current?.style.removeProperty("display");
+        console.log(Object.fromEntries(new FormData(form.current!))); 
+      };
+      form.current.querySelectorAll('input').forEach(input => Object.assign(input, {
+        oninvalid(this: HTMLInputElement, event) {
+          this.setCustomValidity('');
+          if (!this.validity.valid && this.dataset.validationError)
+            this.setCustomValidity(this.dataset.validationError);
+        },
+        oninput(this: HTMLInputElement, event) {
+          this.setCustomValidity('');
         }
-    }, [loginError, passwordError])
-
-    function handleChange_login(){
-        loginInput(login);
+      } as GlobalEventHandlers));
     }
+  }, []);
 
-    function handleChange_password(){
-        passwordInput(password);
-    }
-
-    const loginHandler = (e:any) => {
-        loginInput(e.target.value)
-        const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-        if(!re.test(String(e.target.value).toLowerCase())){
-            loginInputError('Некорректный логин')
-        }else{
-            loginInputError('')
-        }
-        switch (e.target.name){
-            case "login":
-                loginInputDirty(true)
-                break
-            case "password":
-                passwordInputDirty(true)
-                break
-        }
-    }
-
-    return (
-        <div className="AuthorizationForm">
-            <h2>Авторизация</h2>
-            <form>
-                {(loginDirty && loginError) && <div style={{color: 'red'}}>{loginError}</div>}
-                <input onBlur={e => loginHandler(e)} name="login" type="text" placeholder="логин" id="login" value={login} onChange={handleChange_login} /><br/>
-                {(passwordError && passwordDirty) && <div style={{color: 'red'}}>{passwordError}</div>}
-                <input onBlur={e => loginHandler(e)} name="password" type="password" placeholder="пароль" id="password" value={password} onChange={handleChange_password}/><br/>
-                <button disabled={!formValid} type="submit">Вход</button>
-            </form>
-        </div>
-    );
+  return <>
+    <div className="Login">
+      <form className="wrap" ref={form}>
+        <fieldset className="field_login">
+          <h2>Авторизация</h2>
+          <fieldset>
+            <input
+              type="text" id="login" name="login" placeholder="Логин"
+              required={true} pattern="[a-zA-Zа-яА-Я]+" data-validation-error="Только киррилица"/>
+            </fieldset>
+          <fieldset className="field_password">
+            <input
+              type="password" id="password" name="password" placeholder="Пароль"
+              required={true} pattern="[a-zA-Zа-яА-Я]+" data-validation-error="Только киррилица"/>
+          </fieldset>
+          <button className="loginBtn">Войти</button>
+        </fieldset>
+      </form>
+    </div>
+    
+  </>;
 }
 
 export default Login;
