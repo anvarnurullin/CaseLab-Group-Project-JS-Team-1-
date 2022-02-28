@@ -24,6 +24,7 @@ function IngredientList({
   useEffect(() => {
     if (ingredientQuantity !== ingredient.ingredQuantity) {
       changeIngred({
+        ingredTitle: ingredient.ingredTitle,
         idIngredient: ingredient.idIngredient,
         newIngredQuantity: ingredientQuantity,
       });
