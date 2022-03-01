@@ -1,15 +1,20 @@
 import "./Cart.css";
 import "../Modal/Modal.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setMenuAction } from "../../store/menuReducer";
 import { store } from "../../store/store";
 import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import OrderList from "../OrderList/OrderList";
+import {RootState} from '../../store/store';
 
 
 function Cart() {
   const dispatch = useDispatch();
   const [modalContent, setModalContent] = useState<ReactNode>();
+
+  const [clientName, setClientName] = useState('');
+  const [clientPhone, setClientPhone] = useState('');
+  const clientOrder = useSelector((state: RootState) => state.orderList)
 
   const modal_backdrop = useCallback((div: HTMLDivElement) => {
     if (div === null)
@@ -50,23 +55,46 @@ function Cart() {
     }));
   }, []);
 
+  function handleSubmit(event: any){
+    event.preventDefault();
+    //@ts-expect-error
+    if(clientOrder.length === 0) {
+      return
+    }
+    const newOrder = {
+      clientName: clientName,
+      clientPhone: clientPhone,
+      clientOrder: []
+    };
+    //@ts-expect-error
+    clientOrder.forEach(item => {
+      //@ts-expect-error
+      newOrder.clientOrder = [...newOrder.clientOrder, JSON.stringify(item.orderItem)]
+    })
+      fetch('http://localhost:3001/newOrder', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(newOrder),
+      });
+  }
+
   return <>
     <div className="Cart">
       <div className="orderItem">
         <OrderList/>
       </div>
-      <form className="wrap" ref={form}>
+      <form className="wrap" ref={form} onSubmit={(event) => handleSubmit(event)}>
         <fieldset className="field-area1">
           <h2>Ваши данные:</h2>
           <fieldset>
             <input
               type="text" id="name" name="name" placeholder="Имя"
-              required={true} pattern="[a-zA-Zа-яА-Я]+" data-validation-error="Только буквы"/>
+              required={true} pattern="[a-zA-Zа-яА-Я]+" data-validation-error="Только буквы" value={clientName} onChange={(event) => setClientName(event.target.value)}/>
             </fieldset>
           <fieldset className="field-area2">
             <input
               type="tel" id="telephone" name="telephone" placeholder="Телефон"
-              required={true} pattern="\+?[0-9]{1,12}" data-validation-error="Только цифры, не больше 12, можно с плюсом в начале"/>
+              required={true} pattern="\+?[0-9]{1,12}" data-validation-error="Только цифры, не больше 12, можно с плюсом в начале" value={clientPhone} onChange={(event) => setClientPhone(event.target.value)}/>
           </fieldset>
           <button className="submitBtn">Оформить заказ</button>
         </fieldset>
