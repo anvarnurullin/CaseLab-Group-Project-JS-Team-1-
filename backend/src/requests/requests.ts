@@ -105,9 +105,36 @@ router.get('/getPromo', (req: Request, response: Response) => {
 
 });
 
+function addNewOrderForDB(clientName: string, clientPhone: string){
+  const queryForDB = `INSERT INTO shawarma."Orders" VALUES (DEFAULT, '${clientName}', '${clientPhone}');`
+  connection.query(queryForDB, (err: Error, result: QueryResult) => {
+    if(err) console.log(err);
+  });
+};
+
+function addOrderItem(products: string[]){
+  connection.query(`
+    SELECT * FROM shawarma."Orders" ORDER BY "idOrder" DESC LIMIT 1;
+    `, (err: Error, res: QueryResult) => {
+    if (err) throw err;
+    if(res) {      
+      products.forEach(item => {
+        const product = JSON.parse(JSON.stringify(item));
+        const productObject = JSON.parse(product);
+        const queryForDB = `INSERT INTO shawarma."OrderItem" VALUES (DEFAULT, '${productObject.productQuantity}', '${productObject.idProduct}', '${res.rows[0].idOrder}', '${JSON.stringify(productObject)}');`
+        connection.query(queryForDB, (err: Error, res: QueryResult) => {
+          if (err) throw err;
+        });
+      })
+    }
+  });
+  
+}
+
 router.post('/newOrder', (req: Request, response: Response) => {
-  console.log(req.body);
-  //addNewOrderForDB(req.body.name, req.body.telephone);
+  response.header("Content-Type",'application/json');
+  addNewOrderForDB(req.body.clientName, req.body.clientPhone);
+  addOrderItem(req.body.clientOrder)
 });
 
 
