@@ -6,7 +6,6 @@ import "./OrderList.css";
 
 function OrderList() {
   const orderListValue = useSelector((state: RootState) => state.orderList);
-  console.log(orderListValue);
   let setOrderList;
   let sumOrderList: number = 0;
   //@ts-expect-error
@@ -21,7 +20,6 @@ function OrderList() {
     setOrderList = orderListValue.map(function (item) {
       sumOrderList +=
         Number(item.orderItem.price) * item.orderItem.productQuantity;
-      console.log(sumOrderList);
       return <OrderItem {...item} />;
     });
   }

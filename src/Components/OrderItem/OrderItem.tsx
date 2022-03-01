@@ -15,7 +15,6 @@ function OrderItem({
   idOrderItem: number;
   orderItem: OrderList;
 }) {
-  console.log(orderItem);
   const dispatch = useDispatch();
   const counter = +orderItem.productQuantity;
 

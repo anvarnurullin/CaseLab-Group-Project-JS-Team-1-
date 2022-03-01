@@ -17,7 +17,6 @@ function IngredientList({
   ingredient: IngredientsForProduct;
   changeIngred: any;
 }) {
-  console.log(ingredient.ingredPrice, ingredient.ingredTitle);
   const [ingredientQuantity, setIngredQuantity] = useState(
     ingredient.ingredQuantity
   );
@@ -36,17 +35,21 @@ function IngredientList({
     setIngredQuantity(ingredient.ingredQuantity);
   }
   function handleAddIngredBtn() {
-    if (ingredientQuantity < 5) {
+    if (ingredientQuantity < 5 && ingredientQuantity >= ingredient.ingredQuantity) {
       setIngredQuantity(ingredientQuantity + 1);
       dispatch(increasePriceAction(+ingredient.ingredPrice));
+    } else if (ingredientQuantity < ingredient.ingredQuantity) {
+      setIngredQuantity(ingredientQuantity + 1);
     } else {
       setIngredQuantity(5);
     }
   }
   function handleRemoveIngredBtn() {
-    if (ingredientQuantity > 0) {
+    if (ingredientQuantity > ingredient.ingredQuantity) {
       setIngredQuantity(ingredientQuantity - 1);
       dispatch(decreasePriceAction(+ingredient.ingredPrice));
+    } else if(ingredientQuantity <= ingredient.ingredQuantity && ingredientQuantity > 0) {setIngredQuantity(ingredientQuantity - 1);
+      setIngredQuantity(ingredientQuantity - 1);
     } else {
       setIngredQuantity(0);
     }

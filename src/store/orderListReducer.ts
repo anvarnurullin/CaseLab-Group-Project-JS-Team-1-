@@ -70,6 +70,8 @@ export const orderListReducer = (
       });
     case "removeOrderItem":
       return state.filter((item) => item.idOrderItem !== action.payload);
+    case "clearOrderItem":
+      return [];
     default:
       return state;
   }
@@ -96,4 +98,7 @@ export const increaseOrderItemAction = (payload: number) => ({
 export const decreaseOrderItemAction = (payload: number) => ({
   type: "decreaseOrderItem",
   payload,
+});
+export const clearOrderItemAction = () => ({
+  type: "clearOrderItem"
 });

@@ -6,6 +6,7 @@ import { store } from "../../store/store";
 import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import OrderList from "../OrderList/OrderList";
 import {RootState} from '../../store/store';
+import {clearOrderItemAction} from '../../store/orderListReducer'
 
 
 function Cart() {
@@ -71,11 +72,12 @@ function Cart() {
       //@ts-expect-error
       newOrder.clientOrder = [...newOrder.clientOrder, JSON.stringify(item.orderItem)]
     })
-      fetch('http://localhost:3001/newOrder', {
+      fetch('https://caselab-group-1.herokuapp.com/newOrder', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(newOrder),
       });
+      dispatch(clearOrderItemAction());
   }
 
   return <>
